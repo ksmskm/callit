@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Speech Synthesis</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div class="voiceinator">
+    <h1>Call It</h1>
+    <select name="voice" id="voices">
+      <option value="">Select A Voice</option>
+    </select>
+
+    <label for="rate">Rate:</label>
+    <input name="rate" type="range" min="0" max="3" value="1" step="0.1">
+
+    <label for="pitch">Pitch:</label>
+    <input name="pitch" type="range" min="0" max="2" step="0.1">
+
+    <label for="bpm">Beats / Minute</label>
+    <input type="number" step="2" value="60" min="60" max="144">
+
+    <textarea name="text">Sugar Push</textarea>
+    <button id="stop">Stop!</button>
+    <button id="speak">Speak</button>
+  </div>
+  <script src="index.js"></script>
+</body>
+</html>
