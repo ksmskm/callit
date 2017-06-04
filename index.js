@@ -1,7 +1,6 @@
 const msg = new SpeechSynthesisUtterance();
 let voices = [];
 const voicesDropdown = document.querySelector('[name="voice"]');
-const options = document.querySelectorAll('[type="range"], [name="text"]');
 const speakButton = document.querySelector('#speak');
 const stopButton = document.querySelector('#stop');
 msg.text = document.querySelector('[name="text"]').value;
@@ -24,14 +23,15 @@ function speakMsg() {
   speechSynthesis.speak(msg);
 }
 
-function setOption() {
-  msg[this.name] = this.value;
-}
-
 speechSynthesis.addEventListener('voiceschanged', populateVoices);
 voicesDropdown.addEventListener('change', setVoice);
-options.forEach(option => option.addEventListener('change', setOption));
 speakButton.addEventListener('click', speakMsg);
 
 // 'native method': speechSynthesis.cancel must be bound to 'window'
 stopButton.addEventListener('click', () => speechSynthesis.cancel());
+
+// const options = document.querySelectorAll('[type="range"], [name="text"]');
+// function setOption() {
+//   msg[this.name] = this.value;
+// }
+// options.forEach(option => option.addEventListener('change', setOption));
