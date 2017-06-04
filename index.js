@@ -1,8 +1,13 @@
+import Metronome from './metronome';
+
+const metro = new Metronome({});
+
 const msg = new SpeechSynthesisUtterance();
 let voices = [];
 const voicesDropdown = document.querySelector('[name="voice"]');
 const speakButton = document.querySelector('#speak');
 const stopButton = document.querySelector('#stop');
+const repeatButton = document.querySelector('#repeat');
 msg.text = document.querySelector('[name="text"]').value;
 
 function populateVoices() {
@@ -27,8 +32,9 @@ speechSynthesis.addEventListener('voiceschanged', populateVoices);
 voicesDropdown.addEventListener('change', setVoice);
 speakButton.addEventListener('click', speakMsg);
 
-// 'native method': speechSynthesis.cancel must be bound to 'window'
+// 'native method': speechSynthesis.cancel must be bound to 'window'.
 stopButton.addEventListener('click', () => speechSynthesis.cancel());
+
 
 // const options = document.querySelectorAll('[type="range"], [name="text"]');
 // function setOption() {

@@ -38,8 +38,9 @@ h1 {
   border-bottom: 5px solid #F3C010;
   text-align: center;
   font-size: 5rem;
-  font-weight: 100;
-  font-family: 'Pacifico', cursive;
+  font-family: sans-serif;
+  // font-weight: 100;
+  font-weight: bold;
   text-shadow:3px 3px 0 #F3C010;
 
 }
@@ -71,7 +72,7 @@ input[type="select"] {
   border:0;
   width: 49%;
   float:left;
-  font-family: 'Pacifico', cursive;
+  font-family: sans-serif;
   margin-bottom: 0;
   font-size: 2rem;
   border-bottom: 5px solid #F3C010;
