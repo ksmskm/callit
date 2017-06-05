@@ -6,10 +6,7 @@ const livereload = require('gulp-livereload');
 
 // thesocietea.org/2016/01/building-es6-javascript-for-the-browser-with-gulp-babel-and-more/
 gulp.task('build', function () {
-  return browserify({
-    entries: './index.js',
-    debug: true
-  })
+  return browserify({ entries: './index.js', debug: true })
     .transform('babelify', { presets: ['es2015'] })
     .bundle()
     .pipe(source('index.js'))

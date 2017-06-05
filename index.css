@@ -81,6 +81,10 @@ input[type="select"] {
   border-radius: 5px;
 }
 
+.voiceinator button#repeat {
+  width: 100%;
+}
+
 .voiceinator button:active {
   top:2px;
 }
