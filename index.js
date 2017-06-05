@@ -1,11 +1,10 @@
-import Metronome from './metronome';
-
-const metro = new Metronome({});
+import { playSound, stopSound } from './metronome';
 
 const msg = new SpeechSynthesisUtterance();
 let voices = [];
 
 const voicesDropdown = document.querySelector('[name="voice"]');
+const frequencyInput = document.querySelector('[name="bpm"]');
 const speakButton = document.querySelector('#speak');
 const stopButton = document.querySelector('#stop');
 const repeatButton = document.querySelector('#repeat');
@@ -29,14 +28,19 @@ function speakMsg() {
   speechSynthesis.speak(msg);
 }
 
+
 speechSynthesis.addEventListener('voiceschanged', populateVoices);
 voicesDropdown.addEventListener('change', setVoice);
 speakButton.addEventListener('click', speakMsg);
 
 // 'native method': speechSynthesis.cancel must be bound to 'window'.
 stopButton.addEventListener('click', () => speechSynthesis.cancel());
+stopButton.addEventListener('click', stopSound);
 
-repeatButton.addEventListener('click', metronome.playSound);
+repeatButton.addEventListener('click', () => {
+  let frequency = frequencyInput.value;
+  playSound(60000 / frequency);
+});
 
 // const options = document.querySelectorAll('[type="range"], [name="text"]');
 // function setOption() {

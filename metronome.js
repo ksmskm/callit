@@ -1,14 +1,17 @@
-class Metronome {
-  constructor (properties) {
-    this.properties = properties;
-  }
+const audio = document.querySelector('audio[data-key="76"]');
 
-  playSound (e) {
-    const audio = document.querySelector('audio[data-key="76"]');
-    if (!audio) return;
+let metro
+
+function playSound (frequency) {
+  metro = setInterval(function() {
     audio.currentTime = 0;
     audio.play();
-  }  
+  }, frequency);
+}  
+
+function stopSound () {
+  clearInterval(metro);
 }
 
-export default Metronome;
+
+export { playSound, stopSound };
