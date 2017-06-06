@@ -8,8 +8,10 @@ class Metronome {
   timer () {
     this.audio.play();
     this.time += this.interval;
-    let diff = (new Date().getTime() - this.start) - this.time;
-    this.timeout = window.setTimeout(() => this.timer(), (this.interval - diff));     
+    let diff = new Date().getTime() - this.start - this.time;
+    this.timeout = window.setTimeout(() => {
+      this.timer()
+    }, this.interval - diff);     
   }
 
   click (freq) {
@@ -17,7 +19,9 @@ class Metronome {
     this.interval = 60000 / freq; 
     this.time = 0;
     this.audio.play();
-    this.timeout = window.setTimeout(() => this.timer(), this.interval);
+    this.timeout = window.setTimeout(() => {
+      this.timer()
+    }, this.interval);
   }  
 
   stop () {

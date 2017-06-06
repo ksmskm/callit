@@ -8,38 +8,41 @@
   <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
 </head>
 <body>
-  <div class="voiceinator">
-    <h1>Call It</h1>
-    <select name="voice" id="voices">
-      <option value="">Select A Voice</option>
-    </select>
+  <div class="callit">
+    <!-- <h1>Call It</h1> -->
+    <div class="speak-app">
+      <select name="voice" id="voices">
+        <option value="">Select A Voice</option>
+      </select>
+      <button class="start-voice">Speak</button>
+      <button class="stop-voice">Stop</button>
+    </div>
+    <br>
+    <div class="pattern-entry">
+      <form action="">
+        <label for="pattern">Pattern</label>
+        <input type="text" name="pattern" id="pattern" placeholder="Sugar Push" value="Sugar Push">
+        <label for="count">Count</label>
+        <div>
+          <input type="radio" name="count" value="6" checked>6 count  
+        </div>
+        <div>
+          <input type="radio" name="count" value="8">8 count  
+        </div>
+      </form>
+    </div>
+    <br>
+    <div class="metronome-interface">
+      <label for="bpm">Beats / Minute</label>
+      <input name="bpm" type="number" step="2" value="60" min="60" max="144">
 
-    <label for="bpm">Beats / Minute</label>
-    <input name="bpm" type="number" step="2" value="60" min="60" max="144">
+      <button class="start-metro">Repeat</button>
+      <button class="stop-metro">Stop</button>
+    </div>
 
-    <!-- <textarea name="text">Sugar Push</textarea> -->
-    <label for="pattern">Pattern</label>
-    <input type="text" name="pattern" id="pattern" placeholder="Sugar Push">
-    <button id="stop">Stop</button>
-    <button id="speak">Speak</button>
-    <button id="repeat">Repeat</button>
   </div>
 
-  <audio data-key="65" src="sounds/clap.wav"></audio>
-  <audio data-key="83" src="sounds/hihat.wav"></audio>
-  <audio data-key="68" src="sounds/kick.wav"></audio>
-  <audio data-key="70" src="sounds/openhat.wav"></audio>
-  <audio data-key="71" src="sounds/boom.wav"></audio>
-  <audio data-key="72" src="sounds/ride.wav"></audio>
-  <audio data-key="74" src="sounds/snare.wav"></audio>
-  <audio data-key="75" src="sounds/tom.wav"></audio>
   <audio data-key="76" src="sounds/tink.wav"></audio>
-
   <script src="dist/js/index.js"></script>
 </body>
 </html>
-
-<!-- <label for="rate">Rate:</label>
-<input name="rate" type="range" min="0" max="3" value="1" step="0.1">
-<label for="pitch">Pitch:</label>
-<input name="pitch" type="range" min="0" max="2" step="0.1"> -->

@@ -2,12 +2,13 @@ import Metro from './metronome';
 import msg from './voices';
 
 const frequencyInput = document.querySelector('[name="bpm"]');
-const speakButton = document.querySelector('#speak');
-const stopButton = document.querySelector('#stop');
-const repeatButton = document.querySelector('#repeat');
+const startVoiceButton = document.querySelector('.start-voice');
+const stopVoiceButton = document.querySelector('.stop-voice');
+const startMetronomeButton = document.querySelector('.start-metro');
+const stopMetronomeButton = document.querySelector('.stop-metro');
 
 const audio = document.querySelector('audio[data-key="76"]');
-const metro = new Metro({audio: audio});
+const metronome = new Metro({audio: audio});
 
 function speakMsg() {
   msg.text = document.querySelector('[name="pattern"]').value;
@@ -15,17 +16,17 @@ function speakMsg() {
   speechSynthesis.speak(msg);
 }
 
-speakButton.addEventListener('click', speakMsg);
+startVoiceButton.addEventListener('click', speakMsg);
 
 // 'native method': speechSynthesis.cancel must be bound to 'window'.
-stopButton.addEventListener('click', () => speechSynthesis.cancel());
-stopButton.addEventListener('click', function() {
-  repeatButton.disabled = false;
-  metro.stop();
+stopVoiceButton.addEventListener('click', () => speechSynthesis.cancel());
+stopMetronomeButton.addEventListener('click', function() {
+  startMetronomeButton.disabled = false;
+  metronome.stop();
 });
 
-repeatButton.addEventListener('click', function () {
-  metro.click(frequencyInput.value);
+startMetronomeButton.addEventListener('click', function () {
+  metronome.click(frequencyInput.value);
   this.disabled = true;
 });
 
