@@ -1,25 +1,28 @@
-const audio = document.querySelector('audio[data-key="76"]');
+// BASED ON: sitepoint.com/creating-accurate-timers-in-javascript/
 
-let timer;
-let start;
-let interval;
-let time;
+class Metronome {
+  constructor(options) {
+    this.audio = options.audio;
+  }
 
-function instance () {
-  time += interval;
-  var diff = (new Date().getTime() - start) - time;
-  audio.play();
-  timer = window.setTimeout(instance, (interval - diff)); 
+  timer () {
+    this.audio.play();
+    this.time += this.interval;
+    let diff = (new Date().getTime() - this.start) - this.time;
+    this.timeout = window.setTimeout(() => this.timer(), (this.interval - diff));     
+  }
+
+  click (freq) {
+    this.start = new Date().getTime();
+    this.interval = 60000 / freq; 
+    this.time = 0;
+    this.audio.play();
+    this.timeout = window.setTimeout(() => this.timer(), this.interval);
+  }  
+
+  stop () {
+    window.clearTimeout(this.timeout);
+  }  
 }
 
-export function click (freq) {
-  start = new Date().getTime();
-  interval = 60000 / freq; 
-  time = 0;
-  audio.play();
-  timer = window.setTimeout(instance, interval);
-}
-
-export function stop () {
-  window.clearTimeout(timer);
-}
+export default Metronome

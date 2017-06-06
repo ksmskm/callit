@@ -1,10 +1,13 @@
-import * as metro from './metronome';
+import Metro from './metronome';
 import msg from './voices';
 
 const frequencyInput = document.querySelector('[name="bpm"]');
 const speakButton = document.querySelector('#speak');
 const stopButton = document.querySelector('#stop');
 const repeatButton = document.querySelector('#repeat');
+
+const audio = document.querySelector('audio[data-key="76"]');
+const metro = new Metro({audio: audio});
 
 function speakMsg() {
   msg.text = document.querySelector('[name="pattern"]').value;
