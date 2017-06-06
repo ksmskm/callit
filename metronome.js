@@ -1,17 +1,28 @@
 const audio = document.querySelector('audio[data-key="76"]');
 
-let metro
+let running;
+let start;
+let interval;
+let time;
 
-function playSound (frequency) {
-  metro = setInterval(function() {
-    audio.currentTime = 0;
+function instance () {
+  if (running === true) {
+    time += interval;
+    var diff = (new Date().getTime() - start) - time;
     audio.play();
-  }, frequency);
-}  
-
-function stopSound () {
-  clearInterval(metro);
+    window.setTimeout(instance, (interval - diff)); 
+  }
 }
 
+export function click (freq) {
+  running = true;
+  start = new Date().getTime();
+  interval = 60000 / freq; 
+  time = 0;
+  audio.play();
+  window.setTimeout(instance, interval);
+}
 
-export { playSound, stopSound };
+export function stop () {
+  running = false;
+}
