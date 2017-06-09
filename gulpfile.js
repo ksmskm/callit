@@ -19,6 +19,7 @@ gulp.task('watch', ['build'], function () {
   gulp.watch('index.html', ['html']);
   gulp.watch('index.css', ['css']);
   gulp.watch('*.js', ['build']);
+  gulp.watch('./js/*.js', ['build']);
 });
 
 gulp.task('default', ['build', 'watch']);
@@ -30,3 +31,8 @@ gulp.task('html', function() {
 gulp.task('css', function() {
   gulp.src('index.css').pipe(livereload());
 });
+
+// DID: 
+// npm install jshint gulp-jshint --save-dev
+// TODO:
+// stackoverflow.com/questions/27669519/browserify-only-if-lint-passes-in-gulp
