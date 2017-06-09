@@ -9,7 +9,6 @@
 </head>
 <body>
   <div class="callit">
-    <!-- <h1>Call It</h1> -->
     <h3>Voice Synth</h3>
     <div class="speak-app">
       <select name="voice" id="voices">
@@ -18,7 +17,7 @@
       <button class="start-voice">Speak</button>
       <button class="stop-voice">Stop</button>
     </div>
-    <br>
+    <h3>Pattern Entry</h3>
     <div class="pattern-entry">
       <form action="">
         <label for="pattern">Pattern</label>
@@ -32,16 +31,14 @@
         </div>
       </form>
     </div>
-    <br>
     <h3>Metronome</h3>
-    <div class="metronome-interface">
+    <div class="metronome">
       <label for="bpm">Beats / Minute</label>
       <input name="bpm" type="number" step="2" value="88" min="60" max="144">
 
       <button class="start-metro">Start</button>
       <button class="stop-metro">Stop</button>
     </div>
-
   </div>
 
   <audio class="tink" src="sounds/tink.wav"></audio>

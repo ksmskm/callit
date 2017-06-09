@@ -32,15 +32,15 @@ class Metronome {
   }
 
   start (freq) {
-    this.startButton.disabled = true;
-
     this.initialTime = new Date().getTime();
     this.interval = 60000 / freq; 
     this.elapsed = 0;
     this.beat = 1;
     this.callPattern();
-
+    
     this.timeout = window.setTimeout(() => this.processInterval(), this.interval);
+    
+    this.startButton.disabled = true;
   }  
 
   callPattern () {
