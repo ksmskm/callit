@@ -21,38 +21,37 @@ class Metronome {
     this.stopButton.addEventListener('click', () => this.stop());    
   }
 
-  processInterval () {
-    this.callPattern();
+  start (freq) {
+    this.initialTime = new Date().getTime();
+    this.interval = 60000 / freq; 
+    this.elapsed = 0;
     
+    this.current_beat = 1;
+    this.last_beat = 8;
+    
+    this.timeout = window.setTimeout(() => this.processInterval(), this.interval);
+
+    this.startButton.disabled = true;
+  }  
+
+  processInterval () {
+    if (this.current_beat === this.last_beat - 1) {
+      this.speech.speakMsg(this.patterns.currentPattern.name);
+    } else if (this.current_beat === this.last_beat) {  
+      this.speech.speakMsg(this.current_beat);
+      this.patterns.setPattern();
+      this.current_beat = 0;
+      this.last_beat = this.patterns.currentPattern.count;    
+    } else {
+      this.speech.speakMsg(this.current_beat);
+    }
+    
+    this.current_beat += 1;          
     this.elapsed += this.interval;
     let error = new Date().getTime() - this.initialTime - this.elapsed;
     let correctedInterval = this.interval - error;
 
     this.timeout = window.setTimeout(() => this.processInterval(), correctedInterval);     
-  }
-
-  start (freq) {
-    this.initialTime = new Date().getTime();
-    this.interval = 60000 / freq; 
-    this.elapsed = 0;
-    this.beat = 1;
-    this.callPattern();
-    
-    this.timeout = window.setTimeout(() => this.processInterval(), this.interval);
-    
-    this.startButton.disabled = true;
-  }  
-
-  callPattern () {
-    let pattern = this.patterns.currentPattern;
-    if (this.beat === pattern.count) {
-      this.speech.speakMsg(pattern.name);
-      this.patterns.setPattern();
-    } else {
-      this.speech.speakMsg(this.beat);
-    }
-    this.beat %= pattern.count;
-    this.beat += 1;
   }
 
   stop () {
