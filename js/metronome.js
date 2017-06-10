@@ -35,11 +35,9 @@ class Metronome {
   }  
 
   processInterval () {
-    if (this.current_beat === this.last_beat - 1) {
-      this.speech.speakMsg(this.patterns.currentPattern.name);
-    } else if (this.current_beat === this.last_beat) {  
-      this.speech.speakMsg(this.current_beat);
+    if (this.current_beat === this.last_beat) {  
       this.patterns.setPattern();
+      this.speech.speakMsg(this.patterns.currentPattern.name);
       this.current_beat = 0;
       this.last_beat = this.patterns.currentPattern.count;    
     } else {
