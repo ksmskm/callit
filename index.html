@@ -5,20 +5,22 @@
   <title>Speech Synthesis</title>
   
   <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/custom.css">
+
   <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
 </head>
 <body>
   <div class="callit">
-    <h3>Voice Synth</h3>
     <div class="speak-app">
+      <h3>Voice Synth</h3>
       <select name="voice" id="voices">
         <option value="">Select A Voice</option>
       </select>
       <button class="start-voice">Speak</button>
       <button class="stop-voice">Stop</button>
     </div>
-    <h3>Pattern Entry</h3>
     <div class="pattern-entry">
+      <h3>Pattern Entry</h3>
       <form action="">
         <label for="pattern">Pattern</label>
         <input type="text" name="pattern" id="pattern" placeholder="Sugar Push" value="Sugar Push">
@@ -31,6 +33,14 @@
         </div>
       </form>
     </div>
+    <div class="recorder-app">
+      <h3>Recorder</h3>
+      <div id="buttons">
+        <button class="start-record">Record</button>
+        <button class="stop-record">Stop</button>
+        <section class="sound-clips"></section>
+      </div>
+    </div>    
     <h3>Metronome</h3>
     <div class="metronome">
       <label for="bpm">Beats / Minute</label>

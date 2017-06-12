@@ -24,37 +24,38 @@ class Metronome {
   start (freq) {
     this.initialTime = new Date().getTime();
     this.interval = 60000 / freq; 
-    this.elapsed = 0;
     
-    this.current_beat = 1;
-    this.last_beat = 8;
+    this.pattern = { name: 8, count: 8 };
+    this.beat = 1;
+    this.elapsed = false;
     
-    this.timeout = window.setTimeout(() => this.processInterval(), this.interval);
-
+    // this.timeout = window.setTimeout(() => this.processInterval(), this.interval);
+    this.timeout = this.processInterval();
     this.startButton.disabled = true;
-  }  
+  }
 
   processInterval () {
-    if (this.current_beat === this.last_beat) {  
-      this.patterns.setPattern();
-      this.speech.speakMsg(this.patterns.currentPattern.name);
-      this.current_beat = 0;
-      this.last_beat = this.patterns.currentPattern.count;    
+    if (this.beat === this.pattern.count) {  
+      this.pattern = this.patterns.randomPattern();
+      this.speech.speakMsg(this.pattern.name);
+      this.beat = 1;
     } else {
-      this.speech.speakMsg(this.current_beat);
+      this.speech.speakMsg(this.beat);
+      this.beat += 1;          
     }
-    
-    this.current_beat += 1;          
-    this.elapsed += this.interval;
-    let error = new Date().getTime() - this.initialTime - this.elapsed;
-    let correctedInterval = this.interval - error;
 
-    this.timeout = window.setTimeout(() => this.processInterval(), correctedInterval);     
+    this.elapsed = this.elapsed === false ? 0 : this.elapsed + this.interval;
+
+    let error = new Date().getTime() - this.initialTime - this.elapsed;
+    let adjusted = this.interval - error;
+
+    this.timeout = window.setTimeout(() => this.processInterval(), adjusted);     
   }
 
   stop () {
     window.clearTimeout(this.timeout);
     this.startButton.disabled = false;
+    this.elapsed = false;
   }  
 }
 

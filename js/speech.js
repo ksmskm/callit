@@ -2,7 +2,7 @@ class Speech {
   constructor (options) {
     this.voices = [];
     this.message = new SpeechSynthesisUtterance();
-    this.message.rate = 1.4;
+    // this.message.rate = 1.4;
     this.registerDOMNodes();
     this.attachEventListeners();
   }
