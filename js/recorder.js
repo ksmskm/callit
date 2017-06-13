@@ -13,35 +13,25 @@ var soundClips = document.querySelector('.sound-clips');
 
 //main block for doing the audio recording
 if (navigator.getUserMedia) {
-  console.log('getUserMedia supported.');
 
-  var constraints = { audio: true };
   var chunks = [];
 
   var onSuccess = function(stream) {
     var mediaRecorder = new MediaRecorder(stream);
 
-    record.onmousedown = function (e) {
+    record.onmousedown = function () {
       mediaRecorder.start();
-      console.log(mediaRecorder.state);
-      console.log("recorder started");
       record.style.background = "red";
     };
 
-    record.onmouseup = function (e) {
+    record.onmouseup = function () {
       mediaRecorder.stop();
-      console.log(mediaRecorder.state);
-      console.log("recorder stopped");
       record.style.background = "";
-      record.style.color = "";
-      // mediaRecorder.requestData();
     };
 
     mediaRecorder.onstop = function(e) {
-      console.log("data available after MediaRecorder.stop() called.");
 
       var clipName = prompt('Enter a name for your sound clip?','My unnamed clip');
-      console.log(clipName);
       var clipContainer = document.createElement('article');
       var clipLabel = document.createElement('p');
       var audio = document.createElement('audio');
@@ -56,6 +46,7 @@ if (navigator.getUserMedia) {
         clipLabel.textContent = 'My unnamed clip';
       } else {
         clipLabel.textContent = clipName;
+        audio.classList.add(clipName);
       }
 
       clipContainer.appendChild(audio);
@@ -68,21 +59,10 @@ if (navigator.getUserMedia) {
       chunks = [];
       var audioURL = window.URL.createObjectURL(blob);
       audio.src = audioURL;
-      console.log("recorder stopped");
 
       deleteButton.onclick = function(e) {
         var evtTgt = e.target;
         evtTgt.parentNode.parentNode.removeChild(evtTgt.parentNode);
-      }
-
-      clipLabel.onclick = function() {
-        var existingName = clipLabel.textContent;
-        var newClipName = prompt('Enter a new name for your sound clip?');
-        if(newClipName === null) {
-          clipLabel.textContent = existingName;
-        } else {
-          clipLabel.textContent = newClipName;
-        }
       }
     }
 
@@ -91,8 +71,7 @@ if (navigator.getUserMedia) {
     }
   }
 
-  var onError = function(err) {
+  navigator.getUserMedia({ video: false, audio: true }, onSuccess, function(err) {
     console.log('The following error occured: ' + err);
-  }
-  navigator.getUserMedia(constraints, onSuccess, onError);
+  });
 }

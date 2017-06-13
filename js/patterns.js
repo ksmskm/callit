@@ -24,6 +24,10 @@ class Patterns {
     const i = Math.floor(Math.random() * this.patterns.length);
     return this.patterns[i];
   }
+
+  pushPattern (pattern) {
+    this.patterns.push(pattern);
+  }
 }
 
 export default Patterns

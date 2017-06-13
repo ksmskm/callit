@@ -1,4 +1,2 @@
-import Metro from './js/metronome';
-const metronome = new Metro();
-
-import './js/record';
+import Metronome from './js/metronome';
+const metro = new Metronome();

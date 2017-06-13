@@ -3,7 +3,7 @@ import Speech from './speech';
 import Patterns from './patterns';
 
 class Metronome {
-  constructor () {
+  constructor (options) {
     this.registerDOMNodes();
     this.attachEventListeners();
     this.speech = new Speech();
@@ -14,6 +14,8 @@ class Metronome {
     this.bpm = document.querySelector('[name="bpm"]');
     this.startButton = document.querySelector('.start-metro');
     this.stopButton = document.querySelector('.stop-metro');
+    this.tink = document.querySelector('audio.tink');
+    this.one = document.querySelector('audio.one');
   }
 
   attachEventListeners () {
@@ -41,9 +43,10 @@ class Metronome {
       this.beat = 1;
     } else {
       this.speech.speakMsg(this.beat);
-      this.beat += 1;          
+      this.beat += 1;         
     }
 
+    // handles fencepost case
     this.elapsed = this.elapsed === false ? 0 : this.elapsed + this.interval;
 
     let error = new Date().getTime() - this.initialTime - this.elapsed;
@@ -56,7 +59,7 @@ class Metronome {
     window.clearTimeout(this.timeout);
     this.startButton.disabled = false;
     this.elapsed = false;
-  }  
+  }
 }
 
 export default Metronome

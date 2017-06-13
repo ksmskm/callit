@@ -3,55 +3,67 @@
 <head>
   <meta charset="UTF-8">
   <title>Speech Synthesis</title>
-  
-  <link rel="stylesheet" href="css/index.css">
-  <link rel="stylesheet" href="css/custom.css">
 
-  <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="shortcut icon" type="image/png" href="/favicon.png"/>  
 </head>
 <body>
-  <div class="callit">
-    <div class="speak-app">
-      <h3>Voice Synth</h3>
-      <select name="voice" id="voices">
-        <option value="">Select A Voice</option>
-      </select>
-      <button class="start-voice">Speak</button>
-      <button class="stop-voice">Stop</button>
-    </div>
-    <div class="pattern-entry">
-      <h3>Pattern Entry</h3>
-      <form action="">
-        <label for="pattern">Pattern</label>
-        <input type="text" name="pattern" id="pattern" placeholder="Sugar Push" value="Sugar Push">
-        <label for="count">Count</label>
-        <div>
-          <input type="radio" name="count" value="6" checked>6 count  
-        </div>
-        <div>
-          <input type="radio" name="count" value="8">8 count  
-        </div>
-      </form>
-    </div>
-    <div class="recorder-app">
-      <h3>Recorder</h3>
-      <div id="buttons">
-        <button class="start-record">Record</button>
-        <button class="stop-record">Stop</button>
-        <section class="sound-clips"></section>
+
+  <div> <!-- <div class="container"> -->
+    
+    <div class="callit">
+
+      <div class="speaker">
+        <h3>Voice Synth</h3>
+        <form action="" name="speaker">
+          <div>
+            <label for="voice">Voice:</label>
+            <select name="voice" id="voice">
+              <option value="">Select a Voice</option>
+            </select>
+          </div>
+          <div>
+            <label for="phrase">Phrase:</label>
+            <input type="text" name="phrase" id="phrase" value="Sugar Push">
+          </div>
+          <div class="button">
+            <button type="submit">Speak</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="patterns">
+        <h3>Pattern Entry</h3>
+        <form action="" name="patterns">
+          <div>
+            <label for="pattern_name">Name:</label>
+            <input type="text" id="pattern_name" name="name">
+          </div>
+          <div>
+            <label for="pattern_count">Count:</label>
+            <input type="number" id="pattern_count" name="count" step="2" value="6" min="2" max="16">
+          </div>
+          <div class="button">
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="metronome">
+        <h3>Metronome</h3>
+        <form action="" name="metronome">
+          <div>
+            <label for="bpm">BPM:</label>
+            <input type="number" name="bpm" id="bpm" step="2" value="88" min="60" max="144">
+          </div>
+          <div class="button">
+            <button type="submit">Start/Stop</button>
+          </div>
+        </form>
       </div>
     </div>    
-    <h3>Metronome</h3>
-    <div class="metronome">
-      <label for="bpm">Beats / Minute</label>
-      <input name="bpm" type="number" step="2" value="88" min="60" max="144">
-
-      <button class="start-metro">Start</button>
-      <button class="stop-metro">Stop</button>
-    </div>
   </div>
 
-  <audio class="tink" src="sounds/tink.wav"></audio>
   <script src="dist/js/index.js"></script>
 </body>
 </html>
