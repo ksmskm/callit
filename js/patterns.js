@@ -2,14 +2,22 @@ import DefaultPatterns from './patterns.json';
 
 class Patterns {
   constructor () {
-    this.patterns = DefaultPatterns;
-    this.patternForm = document.querySelector('.patterns form');
+    this.patterns        = DefaultPatterns;
+    this.listItemTmpl    = document.getElementById('pattern-list-view');
+    this.patternListView = document.getElementById('pattern-list');
+    this.patternForm     = document.querySelector('.patterns form');
+
     this.patternForm.addEventListener('submit', (e) => {
       e.preventDefault();
       let name = this.patternForm.querySelector('[name=name]').value;
       let count = parseFloat(this.patternForm.querySelector('[name=count]').value);
-      this.pushPattern({name, count});
+      let pattern = {name, count};
+      this.pushPattern(pattern);
     });
+
+    for (let pattern of this.patterns) {
+      this.addListItem(pattern);
+    }
   }
 
   randomPattern () {
@@ -20,7 +28,17 @@ class Patterns {
 
   pushPattern (pattern) {
     this.patterns.push(pattern);
+    this.addListItem(pattern);
   }
+
+  addListItem (pattern) {
+    let ul = this.patternListView;
+    let li = this.listItemTmpl;
+    let span = li.content.querySelector('span');
+    span.textContent = pattern.name;
+
+    ul.appendChild(li.content.cloneNode(true));
+  }  
 }
 
 export default Patterns
