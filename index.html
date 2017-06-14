@@ -27,14 +27,14 @@
             <input type="text" name="phrase" id="phrase" value="Sugar Push">
           </div>
           <div class="button">
-            <button type="submit">Speak</button>
+            <button class="toggle" type="button">Speak</button>
           </div>
         </form>
       </div>
 
       <div class="patterns">
         <h3>Pattern Entry</h3>
-        <form action="" name="patterns">
+        <form action="" name="patterns" method="post">
           <div>
             <label for="pattern_name">Name:</label>
             <input type="text" id="pattern_name" name="name">
@@ -44,7 +44,7 @@
             <input type="number" id="pattern_count" name="count" step="2" value="6" min="2" max="16">
           </div>
           <div class="button">
-            <button type="submit">Submit</button>
+            <button class="addPattern" type="submit">Submit</button>
           </div>
         </form>
       </div>
@@ -57,7 +57,7 @@
             <input type="number" name="bpm" id="bpm" step="2" value="88" min="60" max="144">
           </div>
           <div class="button">
-            <button type="submit">Start/Stop</button>
+            <button class="toggle" type="button">Start/Stop</button>
           </div>
         </form>
       </div>

@@ -8,32 +8,32 @@ class Metronome {
     this.attachEventListeners();
     this.speech = new Speech();
     this.patterns = new Patterns();
+    this.running = false;
   }
 
   registerDOMNodes () {
-    this.bpm = document.querySelector('[name="bpm"]');
-    this.startButton = document.querySelector('.start-metro');
-    this.stopButton = document.querySelector('.stop-metro');
-    this.tink = document.querySelector('audio.tink');
-    this.one = document.querySelector('audio.one');
+    this.bpm = document.querySelector('input#bpm');
+    this.toggleButton = document.querySelector('.metronome button.toggle');
   }
 
   attachEventListeners () {
-    this.startButton.addEventListener('click', () => this.start(this.bpm.value));
-    this.stopButton.addEventListener('click', () => this.stop());    
+    this.toggleButton.addEventListener('click', () => {
+      if (this.running === false) {
+        this.start(this.bpm.value);
+      } else {
+        this.stop();
+      }
+      this.running = !this.running;
+    });
   }
 
   start (freq) {
     this.initialTime = new Date().getTime();
     this.interval = 60000 / freq; 
-    
-    this.pattern = { name: 8, count: 8 };
+    this.pattern = { name: 8, count: 8 }; // count in 8 counts to start.
     this.beat = 1;
     this.elapsed = false;
-    
-    // this.timeout = window.setTimeout(() => this.processInterval(), this.interval);
     this.timeout = this.processInterval();
-    this.startButton.disabled = true;
   }
 
   processInterval () {
@@ -46,18 +46,14 @@ class Metronome {
       this.beat += 1;         
     }
 
-    // handles fencepost case
-    this.elapsed = this.elapsed === false ? 0 : this.elapsed + this.interval;
-
+    this.elapsed = this.elapsed === false ? 0 : this.elapsed + this.interval; // handles fencepost case
     let error = new Date().getTime() - this.initialTime - this.elapsed;
     let adjusted = this.interval - error;
-
     this.timeout = window.setTimeout(() => this.processInterval(), adjusted);     
   }
 
   stop () {
     window.clearTimeout(this.timeout);
-    this.startButton.disabled = false;
     this.elapsed = false;
   }
 }

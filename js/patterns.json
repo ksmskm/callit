@@ -1,0 +1,22 @@
+[
+  {
+    name: "push",
+    count: 6
+  }, 
+  {
+    name: "pass",
+    count: 6
+  }, 
+  {
+    name: "whip",
+    count: 8
+  },
+  {
+    name: "turn",
+    count: 6
+  },
+  {
+    name: "hammer",
+    count: 6
+  }
+]
