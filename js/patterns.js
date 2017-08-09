@@ -36,8 +36,7 @@ class Patterns {
     let li = this.listItemTmpl;
     let span = li.content.querySelector('span');
     span.textContent = pattern.name;
-
-    ul.appendChild(li.content.cloneNode(true));
+    ul.prepend(li.content.cloneNode(true));
   }  
 }
 
