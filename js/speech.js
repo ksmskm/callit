@@ -19,15 +19,15 @@ class Speech {
   attachEventListeners (options) {
     speechSynthesis.addEventListener('voiceschanged', () => this.populateVoices());
 
-    this.toggleButton.addEventListener('click', () => {
-      if (!speechSynthesis.speaking) {
-        const messageText = document.querySelector('input#phrase').value;
-        this.speakMsg(messageText);        
-      } else {
-        // 'native method': speechSynthesis.cancel must be bound to 'window'.
-        speechSynthesis.cancel();        
-      }
-    });
+    // this.toggleButton.addEventListener('click', () => {
+    //   if (!speechSynthesis.speaking) {
+    //     const messageText = document.querySelector('input#phrase').value;
+    //     this.speakMsg(messageText);        
+    //   } else {
+    //     // 'native method': speechSynthesis.cancel must be bound to 'window'.
+    //     speechSynthesis.cancel();        
+    //   }
+    // });
   }
 
   populateVoices () {
