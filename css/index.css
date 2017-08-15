@@ -115,10 +115,8 @@ button:hover {
 }
 
 .pattern-list {
-  width: 400px;
   margin: 0 auto;
-  /*padding: 1em;*/
-  height: 200px;
+  height: 250px;
   overflow-y: scroll;
   border: 1px solid #CCC;
   border-radius: .35em;  
@@ -127,21 +125,19 @@ button:hover {
 #pattern-list {
   list-style: none;
   text-align: left;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 #pattern-list li {
-  margin: 5px auto;
+  margin: 10px auto;
   padding: .5em;
   border: 1px solid #CCC;
   border-radius: .35em;  
   color: #CCC;
-  position: relative;
-  margin-right: 20px;
-  margin-left: -20px;
 }
 
 #pattern-list li button {
-  display: inline-block;
   float: right;
 }
 
@@ -151,7 +147,20 @@ button:hover {
 }
 
 #pattern-list li span {
-  display: inline-block;
   vertical-align: middle;
 }
 
+/* removes stupid blue halo */
+button:focus {
+  outline: 0;
+}
+
+.pattern {
+  padding-bottom: 5px;
+}
+
+/*vertically center the checkboxes*/
+.pattern input[type=checkbox] {
+  position: relative;
+  top: 2px;
+}
