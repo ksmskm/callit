@@ -1,8 +1,7 @@
 h3 {
-    text-decoration: underline;
-    margin-bottom: 10px;
-    color: #999;
-}
+  text-decoration: underline;
+  margin-bottom: 10px;
+  color: #999; }
 
 button {
   padding: 6px;
@@ -10,141 +9,109 @@ button {
   border: 1px solid #CCC;
   border-radius: 5px;
   background: none;
-}
+  /* removes stupid blue halo */ }
+  button:hover {
+    border: 1px solid #999; }
+  button:focus {
+    outline: 0; }
 
-button:hover {
-  border: 1px solid #000;
-}
-
-.speaker form, 
+.speaker form,
 .metronome form {
   margin: 0 auto;
   width: 400px;
   padding: 1em;
   border: 1px solid #CCC;
-  border-radius: .35em;
-}
+  border-radius: .35em; }
 
 .metronome div {
-  display: inline-block;
-}
+  display: inline-block; }
 
 .metronome .button {
   position: relative;
-  bottom: 1px;
-}
+  bottom: 1px; }
 
 .patterns .button {
-  margin-top: 10px;
-}
+  margin-top: 10px; }
+
 input {
-  color: #666;
-}
+  color: #666; }
 
 .form label {
-  color: #CCC;
-}
+  color: #CCC; }
 
 select, input[type="text"], input[type="number"] {
   font: 1em sans-serif;
   box-sizing: border-box;
   border: 1px solid #999;
   border-radius: 5px;
-  padding: 2px 5px 3px 5px;
-}
+  padding: 2px 5px 3px 5px; }
 
 .speaker, .patterns, .metronome {
   text-align: center;
-  font-family: sans-serif;
-}
+  font-family: sans-serif; }
 
 .patterns-body {
   border: 1px solid #CCC;
-  border-radius: .35em;  
+  border-radius: .35em;
   width: 400px;
   margin: 0 auto;
-  padding: 1em;
-}
+  padding: 1em; }
 
 .pattern-form div.inline {
-  display: inline;  
-}
+  display: inline; }
 
 .pattern-form input[type="text"] {
   width: 190px;
-  margin-right: 10px;
-}
+  margin-right: 10px; }
 
 .pattern-form input[type="number"] {
   width: 60px;
   display: inline;
-  vertical-align: middle;
-}
+  vertical-align: middle; }
 
 .pattern-form button {
-  margin-bottom: 10px;
-}
+  margin-bottom: 10px; }
 
 .pattern-list {
   margin: 0 auto;
   height: 250px;
   overflow-y: scroll;
   border: 1px solid #CCC;
-  border-radius: .35em;  
-}
+  border-radius: .35em; }
 
 #pattern-list {
   list-style: none;
   text-align: left;
   padding-left: 10px;
-  padding-right: 10px;
-}
-
-#pattern-list li {
-  margin: 10px auto;
-  padding: .5em;
-  border: 1px solid #CCC;
-  border-radius: .35em;  
-  color: #CCC;
-}
-
-#pattern-list li button {
-  float: right;
-}
-
-#pattern-list li button:hover {
-  color: red;
-  border: 1px solid red;
-}
-
-#pattern-list li span {
-  vertical-align: middle;
-}
-
-/* removes stupid blue halo */
-button:focus {
-  outline: 0;
-}
+  padding-right: 10px; }
+  #pattern-list li {
+    margin: 10px auto;
+    padding: .5em;
+    border: 1px solid #CCC;
+    border-radius: .35em;
+    color: #CCC; }
+    #pattern-list li span {
+      vertical-align: middle; }
+    #pattern-list li button {
+      float: right; }
+      #pattern-list li button:hover {
+        color: red;
+        border: 1px solid red; }
 
 input:focus {
-  outline-color: #999;
-}
+  outline-color: #999; }
 
 .pattern {
-  padding-bottom: 5px;
-}
+  padding-bottom: 5px; }
 
 /*vertically center the checkboxes*/
 input[type=checkbox] {
   position: relative;
-  top: 2px;
-}
+  top: 2px; }
 
 select#voice {
-  width: 70%;
-}
+  width: 70%; }
 
 label[for="pattern_count"] {
   position: relative;
-  top: 1px;
-}
+  top: 1px; }

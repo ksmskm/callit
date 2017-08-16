@@ -1,7 +1,7 @@
 h3 {
-    text-decoration: underline;
-    margin-bottom: 10px;
-    color: #999;
+  text-decoration: underline;
+  margin-bottom: 10px;
+  color: #999;
 }
 
 button {
@@ -10,10 +10,14 @@ button {
   border: 1px solid #CCC;
   border-radius: 5px;
   background: none;
-}
 
-button:hover {
-  border: 1px solid #000;
+  &:hover {
+  	border: 1px solid #999;
+	}
+	/* removes stupid blue halo */
+	&:focus {
+	  outline: 0;
+	}
 }
 
 .speaker form, 
@@ -98,32 +102,27 @@ select, input[type="text"], input[type="number"] {
   text-align: left;
   padding-left: 10px;
   padding-right: 10px;
-}
 
-#pattern-list li {
-  margin: 10px auto;
-  padding: .5em;
-  border: 1px solid #CCC;
-  border-radius: .35em;  
-  color: #CCC;
-}
+	li {
+	  margin: 10px auto;
+	  padding: .5em;
+	  border: 1px solid #CCC;
+	  border-radius: .35em;  
+	  color: #CCC;
 
-#pattern-list li button {
-  float: right;
-}
+		span {
+		  vertical-align: middle;
+		}
 
-#pattern-list li button:hover {
-  color: red;
-  border: 1px solid red;
-}
+	  button {
+	  	float: right;
 
-#pattern-list li span {
-  vertical-align: middle;
-}
-
-/* removes stupid blue halo */
-button:focus {
-  outline: 0;
+	  	&:hover {
+			  color: red;
+			  border: 1px solid red;
+	  	}
+	  }
+	}
 }
 
 input:focus {

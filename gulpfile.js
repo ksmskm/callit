@@ -3,6 +3,15 @@ const browserify = require('browserify');
 const babelify   = require('babelify');
 const source     = require('vinyl-source-stream');
 const livereload = require('gulp-livereload');
+const sass       = require('gulp-sass');
+const plumber    = require('gulp-plumber');
+const beep       = require('beepbeep');
+const gutil      = require('gulp-util');
+
+const onError = function (err) {
+  beep([0, 0, 0]);
+  gutil.log(gutil.colors.green(err));
+};
 
 // thesocietea.org/2016/01/building-es6-javascript-for-the-browser-with-gulp-babel-and-more/
 gulp.task('build', function () {
@@ -18,21 +27,29 @@ gulp.task('watch', ['build'], function () {
   livereload.listen();
   gulp.watch('index.html', ['html']);
   gulp.watch('css/*.css', ['css']);
+  gulp.watch('scss/*.scss', ['scss']);
   gulp.watch('*.js', ['build']);
   gulp.watch('./js/*.js', ['build']);
 });
 
-gulp.task('default', ['build', 'watch']);
+gulp.task('default', ['watch']);
 
 gulp.task('html', function() {
-  gulp.src('index.html').pipe(livereload());
+  gulp.src('index.html')
+    .pipe(plumber({ errorHandler: onError }))
+    .pipe(livereload());
 });
 
 gulp.task('css', function() {
-  gulp.src('css/*.css').pipe(livereload());
+  gulp.src('css/*.css')
+    .pipe(plumber({ errorHandler: onError }))
+    .pipe(livereload());
 });
 
-// DID: 
-// npm install jshint gulp-jshint --save-dev
-// TODO:
-// stackoverflow.com/questions/27669519/browserify-only-if-lint-passes-in-gulp
+gulp.task('scss', function() {
+  return gulp.src(['./scss/app.scss'])
+    .pipe(plumber({ errorHandler: onError }))
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('./css'));
+    // .pipe(livereload());
+});
