@@ -47,7 +47,7 @@ gulp.task('css', function() {
 });
 
 gulp.task('scss', function() {
-  return gulp.src(['./scss/app.scss'])
+  return gulp.src(['./scss/index.scss'])
     .pipe(plumber({ errorHandler: onError }))
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('./css'));
