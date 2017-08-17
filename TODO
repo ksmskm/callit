@@ -1,2 +1,3 @@
 style <select>
-implement delete but on list items
+
+handle empty list case on metronome start/stop

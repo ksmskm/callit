@@ -1,22 +1,22 @@
-[
-  {
+{
+  "push": {
     name: "push",
     count: 6
   }, 
-  {
+  "pass": {
     name: "pass",
     count: 6
   }, 
-  {
-    name: "whip",
-    count: 8
-  },
-  {
+  "turn": {
     name: "turn",
     count: 6
   },
-  {
-    name: "hammer",
-    count: 6
-  }
-]
+  "whip": {
+    name: "whip",
+    count: 8
+  },
+  "telemark": {
+    name: "telemark",
+    count: 8
+  }  
+}

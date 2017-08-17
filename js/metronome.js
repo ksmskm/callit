@@ -1,4 +1,4 @@
-// BASED ON: sitepoint.com/creating-accurate-timers-in-javascript/
+// TIMING INTERVAL BASED ON: sitepoint.com/creating-accurate-timers-in-javascript/
 import Speech from './speech';
 import Patterns from './patterns';
 
@@ -28,12 +28,16 @@ class Metronome {
   }
 
   start (freq) {
-    this.initialTime = new Date().getTime();
-    this.interval = 60000 / freq; 
-    this.pattern = { name: 8, count: 8 }; // count in 8 counts to start.
-    this.beat = 1;
-    this.elapsed = false;
-    this.timeout = this.processInterval();
+    if (Object.keys(this.patterns.patterns).length === 0) {
+      alert('please add patterns');
+    } else {
+      this.initialTime = new Date().getTime();
+      this.interval = 60000 / freq; 
+      this.pattern = { name: 8, count: 8 }; // count in 8 beats to start.
+      this.beat = 1;
+      this.elapsed = false;
+      this.timeout = this.processInterval();
+    }
   }
 
   processInterval () {

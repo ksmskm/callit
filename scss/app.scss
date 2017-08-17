@@ -30,17 +30,14 @@ button {
 }
 
 .metronome div {
-  display: inline-block;
+  display: inline;
 }
 
 .metronome .button {
   position: relative;
-  bottom: 1px;
+  bottom: 2px;
 }
 
-.patterns .button {
-  margin-top: 10px;
-}
 input {
   color: #666;
 }
@@ -70,38 +67,37 @@ select, input[type="text"], input[type="number"] {
   padding: 1em;
 }
 
-.pattern-form div.inline {
-  display: inline;  
+.pattern-form {
+	.name, .count, .button {
+	  display: inline-block;  
+		vertical-align: middle;
+	}
 }
 
 .pattern-form input[type="text"] {
-  width: 190px;
-  margin-right: 10px;
-}
-
-.pattern-form input[type="number"] {
-  width: 60px;
-  display: inline;
-  vertical-align: middle;
-}
-
-.pattern-form button {
-  margin-bottom: 10px;
+  width: 130px;
 }
 
 .pattern-list {
-  margin: 0 auto;
-  height: 250px;
+  max-height: 250px;
+  margin: 10px auto;
   overflow-y: scroll;
   border: 1px solid #CCC;
   border-radius: .35em;  
 }
 
+.pattern-form {
+	padding: 5px;
+
+	form {
+		padding: 5px;
+	}
+}
+
 #pattern-list {
   list-style: none;
   text-align: left;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 0 10px;
 
 	li {
 	  margin: 10px auto;
@@ -125,12 +121,22 @@ select, input[type="text"], input[type="number"] {
 	}
 }
 
-input:focus {
-  outline-color: #999;
+/* CLEARFIX */
+div.pattern {
+  clear: both;
+  *zoom: 1;
+
+  &:before, &:after {
+  	content: "";
+  	display: table;
+  }
+  &:after {
+  	clear: both;
+  }
 }
 
-.pattern {
-  padding-bottom: 5px;
+input:focus {
+  outline-color: #999;
 }
 
 /*vertically center the checkboxes*/
@@ -147,3 +153,8 @@ label[for="pattern_count"] {
   position: relative;
   top: 1px;
 }
+
+/* DEV */
+// * {
+//    border: 1px solid red !important;
+// }
