@@ -15,11 +15,11 @@ const onError = function (err) {
 
 // thesocietea.org/2016/01/building-es6-javascript-for-the-browser-with-gulp-babel-and-more/
 gulp.task('build', function () {
-  return browserify({ entries: './index.js', debug: true })
+  return browserify({ entries: './js/index.js', debug: true })
     .transform('babelify', { presets: ['es2015'] })
     .bundle()
-    .pipe(source('index.js'))
-    .pipe(gulp.dest('./dist/js'))
+    .pipe(source('./js/index.js'))
+    .pipe(gulp.dest('./dist'))
     .pipe(livereload());
 });
 
@@ -28,7 +28,6 @@ gulp.task('watch', ['build'], function () {
   gulp.watch('index.html', ['html']);
   gulp.watch('css/*.css', ['css']);
   gulp.watch('scss/*.scss', ['scss']);
-  gulp.watch('*.js', ['build']);
   gulp.watch('./js/*.js', ['build']);
 });
 

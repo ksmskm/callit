@@ -20,6 +20,11 @@ button {
 	}
 }
 
+.speaker, .patterns, .metronome {
+  text-align: center;
+  font-family: sans-serif;
+}
+
 .speaker form, 
 .metronome form {
   margin: 0 auto;
@@ -30,16 +35,8 @@ button {
 }
 
 .metronome div {
-  display: inline;
-}
-
-.metronome .button {
-  position: relative;
-  bottom: 2px;
-}
-
-input {
-  color: #666;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .form label {
@@ -47,16 +44,12 @@ input {
 }
 
 select, input[type="text"], input[type="number"] {
+  color: #666;
   font: 1em sans-serif;
   box-sizing: border-box;
   border: 1px solid #999;
   border-radius: 5px;
   padding: 2px 5px 3px 5px;
-}
-
-.speaker, .patterns, .metronome {
-  text-align: center;
-  font-family: sans-serif;
 }
 
 .patterns-body {
@@ -145,16 +138,12 @@ input[type=checkbox] {
   top: 2px;
 }
 
-select#voice {
-  width: 70%;
-}
-
 label[for="pattern_count"] {
   position: relative;
   top: 1px;
 }
 
 /* DEV */
-* {
-   border: 1px solid red !important;
-}
+// * {
+//    border: 1px solid red !important;
+// }
