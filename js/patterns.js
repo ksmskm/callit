@@ -3,7 +3,8 @@ import DefaultPatterns from './patterns.json';
 class Patterns {
   constructor () {
     this.patterns        = DefaultPatterns;
-    this.listItemTmpl    = document.getElementById('pattern-list-view');
+    this.listItemTmpl    = document
+                            .getElementById('pattern-list-view').import.querySelector('template');
     this.patternListView = document.getElementById('pattern-list');
     this.patternForm     = document.querySelector('.patterns form');
 
