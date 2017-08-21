@@ -9,61 +9,66 @@
 </head>
 <body>
 
-  <div>
-    
-    <div class="callit">
+  <header>
+    <img src="dist/pixel-headshot.png" alt="logo">
+    <h1>Call It</h1>
+  </header>
 
-      <div class="speaker">
-        <h3>Voice</h3>
-        <form action="" name="speaker">
-          <select name="voice" id="voice">
-            <option value="">Select a Voice</option>
-          </select>
-        </form>
-      </div>
+  <div class="callit">
+  
+    <div class="speaker">
+      <h3>Voice</h3>
+      <form action="" name="speaker">
+        <select name="voice" id="voice">
+          <option value="">Select a Voice</option>
+        </select>
+      </form>
+    </div>
 
-      <div class="patterns">
-        <h3>Patterns</h3>
-        <div class="patterns-body">
-          <div class="pattern-form">
-            <form action="" name="patterns" method="post">
-              <div class="name">
-                <label for="pattern_name">Name:</label>
-                <input type="text" id="pattern_name" name="name">
-              </div>
-              <div class="count">
-                <label for="pattern_count">Count:</label>
-                <input type="number" id="pattern_count" name="count" step="2" value="6" min="2" max="16">
-              </div>
-              <div class="button">
-                <button class="addPattern" type="submit">Submit</button>
-              </div>
-            </form>
-          </div>
-
-          <div class="pattern-list">
-            <ul id="pattern-list"></ul>
-          </div>          
+    <div class="patterns">
+      <h3>Patterns</h3>
+      <div class="patterns-body">
+        <div class="pattern-form">
+          <form action="" name="patterns" method="post">
+            <div class="name">
+              <label for="pattern_name">Name:</label>
+              <input type="text" id="pattern_name" name="name">
+            </div>
+            <div class="count">
+              <label for="pattern_count">Count:</label>
+              <input type="number" id="pattern_count" name="count" step="2" value="6" min="2" max="16">
+            </div>
+            <div class="button">
+              <button class="addPattern" type="submit">Submit</button>
+            </div>
+          </form>
         </div>
-      </div>
 
-      <div class="metronome">
-        <h3>Metronome</h3>
-        <form action="" name="metronome">
-          <div>
-            <label for="bpm">BPM:</label>
-            <input type="number" name="bpm" id="bpm" step="2" value="88" min="60" max="144">
-          </div>
-          <div class="button">
-            <button class="toggle" type="button">Start/Stop</button>
-          </div>
-        </form>
+        <div class="pattern-list">
+          <ul id="pattern-list"></ul>
+        </div>          
       </div>
-    </div>    
-  </div>
+    </div>
+
+    <div class="metronome">
+      <h3>Metronome</h3>
+      <form action="" name="metronome">
+        <div>
+          <label for="bpm">BPM:</label>
+          <input type="number" name="bpm" id="bpm" step="2" value="88" min="60" max="144">
+        </div>
+        <div class="button">
+          <button class="toggle" type="button">Start/Stop</button>
+        </div>
+      </form>
+    </div>
+
+  </div>    
 
   <footer>
-    copy-right ksmskm
+    <div class="wrapper">
+
+    </div>
   </footer>
   
   <script src="dist/js/index.js"></script>
