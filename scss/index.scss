@@ -4,9 +4,16 @@ body {
 }
 
 h3 {
-  text-decoration: underline;
-  margin-bottom: 10px;
-  color: #999;
+  // text-decoration: underline;
+  margin: 10px 0;
+  color: #bbb;
+  font: 300 22px/30px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  border-bottom: solid 1px #bbb;
+  display: inline-block;
+}
+
+.speaker h3 {
+  // margin-top: 40px;
 }
 
 button {
@@ -135,14 +142,14 @@ div.pattern {
 
 input {
   background-color: #eee;
+
+  &:focus {
+    outline-color: #999;
+  }
 }
 
 select {
   background-color: #eee;
-}
-
-input:focus {
-  outline-color: #999;
 }
 
 /*vertically center the checkboxes*/
@@ -159,19 +166,18 @@ label[for="pattern_count"] {
  /* HEADER & FOOTER */
 
 footer {
-  width: 100%;
   background-color: #ddd;
-  padding: 15px 0px;
-}
-
-.callit {
-  margin: 30px;
+  padding: 15px;
+  font-family: 'Titillium Web', sans-serif;
+  text-align: right;
 }
 
 header {
   width: 100%;
   background-color: #ddd;
   position: relative;
+  padding-bottom: 5px;
+  font-family: 'Titillium Web', sans-serif;
 }
 
 header img {
@@ -181,25 +187,44 @@ header img {
   margin: 10px 10px;
   border: 5px solid #eee;
   background-color: #999;
+  float: left;
 }
 
 header h1 {
   font-family: sans-serif;
   font-size: 3em;
-  color: #aaa;
-  text-transform: uppercase;
+  color: #fff;
   font-weight: 400;
-  display: inline;
-  position: absolute;
-  text-align: center;
-  width: 410px;
-  // height: 80px;
-  left: 360px;
-  top: -22%;
-  background-color: #eee;
-  border-radius: 5px;
-  border: 5px solid #ccc;
-  padding: 10px;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+/* NAV */
+nav {
+
+  display: inline-block;
+
+  &.header {
+    margin: 25px 20px;
+    float: right;
+
+  }
+
+  li {
+    display: inline-block;
+    margin: 5px 5px;
+    vertical-align: middle;
+
+    a {
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+}
+
+.callit {
+  // fixes mysterious offset of 'voice' h3
+  margin: 40px 0;
 }
 
 /* DEV */

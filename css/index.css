@@ -3,9 +3,11 @@ body {
   background-color: #eee; }
 
 h3 {
-  text-decoration: underline;
-  margin-bottom: 10px;
-  color: #999; }
+  margin: 10px 0;
+  color: #bbb;
+  font: 300 22px/30px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  border-bottom: solid 1px #bbb;
+  display: inline-block; }
 
 button {
   padding: 6px;
@@ -102,12 +104,11 @@ div.pattern {
 
 input {
   background-color: #eee; }
+  input:focus {
+    outline-color: #999; }
 
 select {
   background-color: #eee; }
-
-input:focus {
-  outline-color: #999; }
 
 /*vertically center the checkboxes*/
 input[type=checkbox] {
@@ -120,17 +121,17 @@ label[for="pattern_count"] {
 
 /* HEADER & FOOTER */
 footer {
-  width: 100%;
   background-color: #ddd;
-  padding: 15px 0px; }
-
-.callit {
-  margin: 30px; }
+  padding: 15px;
+  font-family: 'Titillium Web', sans-serif;
+  text-align: right; }
 
 header {
   width: 100%;
   background-color: #ddd;
-  position: relative; }
+  position: relative;
+  padding-bottom: 5px;
+  font-family: 'Titillium Web', sans-serif; }
 
 header img {
   height: 70px;
@@ -138,23 +139,32 @@ header img {
   border-radius: 40px;
   margin: 10px 10px;
   border: 5px solid #eee;
-  background-color: #999; }
+  background-color: #999;
+  float: left; }
 
 header h1 {
   font-family: sans-serif;
   font-size: 3em;
-  color: #aaa;
-  text-transform: uppercase;
+  color: #fff;
   font-weight: 400;
-  display: inline;
-  position: absolute;
-  text-align: center;
-  width: 410px;
-  left: 360px;
-  top: -22%;
-  background-color: #eee;
-  border-radius: 5px;
-  border: 5px solid #ccc;
-  padding: 10px; }
+  display: inline-block;
+  margin-top: 10px; }
+
+/* NAV */
+nav {
+  display: inline-block; }
+  nav.header {
+    margin: 25px 20px;
+    float: right; }
+  nav li {
+    display: inline-block;
+    margin: 5px 5px;
+    vertical-align: middle; }
+    nav li a {
+      color: #fff;
+      text-decoration: none; }
+
+.callit {
+  margin: 40px 0; }
 
 /* DEV */
