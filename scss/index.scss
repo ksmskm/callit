@@ -4,16 +4,11 @@ body {
 }
 
 h3 {
-  // text-decoration: underline;
   margin: 10px 0;
   color: #bbb;
   font: 300 22px/30px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   border-bottom: solid 1px #bbb;
   display: inline-block;
-}
-
-.speaker h3 {
-  // margin-top: 40px;
 }
 
 button {
@@ -22,6 +17,7 @@ button {
   border: 1px solid #CCC;
   border-radius: 5px;
   background: none;
+  color: #666;  
 
   &:hover {
   	border: 1px solid #999;
@@ -30,6 +26,10 @@ button {
 	&:focus {
 	  outline: 0;
 	}
+}
+
+label {
+  color: #666;
 }
 
 .speaker, .patterns, .metronome {
@@ -51,10 +51,6 @@ button {
   vertical-align: middle;
 }
 
-.form label {
-  color: #CCC;
-}
-
 select, input[type="text"], input[type="number"] {
   color: #666;
   font: 1em sans-serif;
@@ -72,17 +68,6 @@ select, input[type="text"], input[type="number"] {
   padding: 1em;
 }
 
-.pattern-form {
-	.name, .count, .button {
-	  display: inline-block;  
-		vertical-align: middle;
-	}
-}
-
-.pattern-form input[type="text"] {
-  width: 130px;
-}
-
 .pattern-list {
   max-height: 250px;
   margin: 10px auto;
@@ -92,11 +77,22 @@ select, input[type="text"], input[type="number"] {
 }
 
 .pattern-form {
-	padding: 5px;
-
 	form {
-		padding: 5px;
+		padding: 5px 5px 0px 5px;
 	}
+
+  .name, .count {
+    display: inline-block;  
+    vertical-align: middle;
+  }  
+
+  .button {
+    margin-top: 8px;
+  }
+  
+  input[type="text"] {
+    width: 130px;
+  }
 }
 
 #pattern-list {
@@ -130,6 +126,13 @@ select, input[type="text"], input[type="number"] {
 div.pattern {
   clear: both;
   *zoom: 1;
+  
+  position: relative;
+  // vertically center the pattern name
+  span {
+    position: absolute;
+    top: 5px;
+  }
 
   &:before, &:after {
   	content: "";
@@ -152,56 +155,42 @@ select {
   background-color: #eee;
 }
 
-/*vertically center the checkboxes*/
-input[type=checkbox] {
-  position: relative;
-  top: 2px;
-}
-
-label[for="pattern_count"] {
-  position: relative;
-  top: 1px;
-}
-
- /* HEADER & FOOTER */
-
-footer {
+/* HEADER & FOOTER */
+header, footer {
   background-color: #ddd;
-  padding: 15px;
-  font-family: 'Titillium Web', sans-serif;
-  text-align: right;
+  font-family: 'Titillium Web', sans-serif;  
 }
 
 header {
-  width: 100%;
-  background-color: #ddd;
-  position: relative;
   padding-bottom: 5px;
-  font-family: 'Titillium Web', sans-serif;
+
+  img {
+    height: 70px;
+    width: 70px;
+    border-radius: 40px;
+    margin: 10px 10px;
+    border: 5px solid #eee;
+    background-color: #999;
+    float: left;
+  }
+  
+  h1 {
+    font-family: sans-serif;
+    font-size: 3em;
+    color: #fff;
+    font-weight: 400;
+    display: inline-block;
+    margin-top: 10px;
+  }
 }
 
-header img {
-  height: 70px;
-  width: 70px;
-  border-radius: 40px;
-  margin: 10px 10px;
-  border: 5px solid #eee;
-  background-color: #999;
-  float: left;
-}
-
-header h1 {
-  font-family: sans-serif;
-  font-size: 3em;
-  color: #fff;
-  font-weight: 400;
-  display: inline-block;
-  margin-top: 10px;
+footer {
+  padding: 15px;
+  text-align: right;
 }
 
 /* NAV */
 nav {
-
   display: inline-block;
 
   &.header {
@@ -223,7 +212,7 @@ nav {
 }
 
 .callit {
-  // fixes mysterious offset of 'voice' h3
+  // addresses weird offset of 'voice' h3
   margin: 40px 0;
 }
 
