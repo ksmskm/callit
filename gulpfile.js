@@ -25,7 +25,7 @@ gulp.task('build', function () {
 
 gulp.task('watch', ['build'], function () {
   livereload.listen();
-  gulp.watch(['index.html', 'html/*.html'], ['html']);
+  gulp.watch(['./*.html', 'html/*.html'], ['html']);
   gulp.watch('css/*.css', ['css']);
   gulp.watch('scss/*.scss', ['scss']);
   gulp.watch('./js/*.js', ['build']);
@@ -35,7 +35,7 @@ gulp.task('default', ['watch']);
 
 gulp.task('html', function() {
   gulp
-    .src(['index.html', 'html/*.html'])
+    .src(['./*.html', 'html/*.html'])
     .pipe(plumber({ errorHandler: onError }))
     .pipe(livereload());
 });
@@ -49,7 +49,7 @@ gulp.task('css', function() {
 
 gulp.task('scss', function() {
   gulp
-    .src(['./scss/index.scss'])
+    .src(['./scss/*.scss'])
     .pipe(plumber({ errorHandler: onError }))
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('./css'));
