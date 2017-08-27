@@ -1,6 +1,6 @@
 .main {
   font: 300 16px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  margin-bottom: 600px;
+  margin-bottom: 320px;
   color: #777;
   width: 100%; }
 
@@ -15,6 +15,8 @@ h3 {
   margin: 0 auto;
   width: 400px;
   text-align: center; }
+  .about p {
+    margin-top: 5px; }
   .about ol {
     margin-top: 20px;
     margin-left: 100px;
