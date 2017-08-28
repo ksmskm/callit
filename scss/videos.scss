@@ -1,5 +1,62 @@
 .main {
-	font: 300 12px/12px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-	text-align: center;
-	margin-bottom: 600px;
+	font: 300 16px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	// margin-bottom: 600px;
+}
+
+
+
+h3 {
+  margin-bottom: 20px;
+  color: #bbb;
+  font: 300 22px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  border-bottom: solid 1px #bbb;
+  display: inline-block;
+}
+
+h5 {
+	color: #bbb;
+}
+
+h6 {
+	color: #555;
+}
+
+.videos {
+	margin: 0 auto;
+	width: 60%;
+}
+
+
+ul {
+	
+}
+
+li {
+	img {
+		float: left;
+		max-width: 180px;
+		padding-bottom: 5px;
+		margin-right: 15px;
+		border-bottom: 3px solid #ddd;
+	}
+
+	// CLEAR FIX
+	div {
+	  clear: both;
+	  *zoom: 1;
+
+	  &:before, &:after {
+	  	content: "";
+	  	display: table;
+	  }
+	  &:after {
+	  	clear: both;
+	  }
+	}
+	margin-bottom: 25px;
+}
+
+p {
+	margin-top: 5px;
+	text-indent: 15px;
 }

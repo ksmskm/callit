@@ -2,7 +2,6 @@
 	font: 300 16px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	margin-bottom: 320px;
 	color: #777;
-	width: 100%;
 }
 
 h3 {
@@ -27,4 +26,8 @@ h3 {
 		margin-left: 100px;
 		text-align: left;
 	}
+}
+
+ol { 
+   list-style-type: circle;
 }

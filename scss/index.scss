@@ -138,14 +138,6 @@ div.pattern {
   }
 }
 
-input {
-  background-color: #eee;
-
-  &:focus {
-    outline-color: #999;
-  }
-}
-
-select {
-  background-color: #eee;
+input:focus {
+  outline-color: #999;
 }
