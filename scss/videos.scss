@@ -13,7 +13,7 @@ h3 {
   display: inline-block;
 }
 
-@media max-width: $break-mobile {
+@media (max-width: $break-mobile) {
 	div.videos {
 		text-align: center;
 		

@@ -8,12 +8,6 @@ header, footer {
   .wrapper {
     padding: 10px;
   }
-
-  @media max-width: $break-mobile {
-    footer {
-      text-align: center;
-    }
-  }  
 }
 
 header {
@@ -37,11 +31,22 @@ header {
     display: inline-block;
     margin-top: 10px;
   }
+
+  @media (max-width: $break-mobile) {
+    text-align: center;
+    img {
+      display: none
+    }
+  }
 }
 
 footer {
   padding: 15px 20px;
   text-align: right;
+
+  @media (max-width: $break-mobile) {
+    text-align: center;
+  }    
 }
 
 /* NAV */
@@ -51,7 +56,11 @@ header nav, footer nav {
   &.header {
     margin: 25px 20px;
     float: right;
-
+    
+    @media (max-width: $break-mobile) {
+      margin: 15px 20px;
+      float: none;
+    }
   }
 
   li {

@@ -22,7 +22,7 @@ header {
     font-weight: 400;
     display: inline-block;
     margin-top: 10px; }
-  @media screen and (max-width: 560px) {
+  @media (max-width: 560px) {
     header {
       text-align: center; }
       header img {
@@ -31,10 +31,9 @@ header {
 footer {
   padding: 15px 20px;
   text-align: right; }
-
-@media screen and (max-width: 560px) {
-  footer {
-    text-align: center; } }
+  @media (max-width: 560px) {
+    footer {
+      text-align: center; } }
 
 /* NAV */
 header nav, footer nav {
@@ -42,6 +41,10 @@ header nav, footer nav {
   header nav.header, footer nav.header {
     margin: 25px 20px;
     float: right; }
+    @media (max-width: 560px) {
+      header nav.header, footer nav.header {
+        margin: 15px 20px;
+        float: none; } }
   header nav li, footer nav li {
     display: inline-block;
     margin: 5px 5px;
