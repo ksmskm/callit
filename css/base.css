@@ -22,10 +22,19 @@ header {
     font-weight: 400;
     display: inline-block;
     margin-top: 10px; }
+  @media screen and (max-width: 560px) {
+    header {
+      text-align: center; }
+      header img {
+        display: none; } }
 
 footer {
   padding: 15px 20px;
   text-align: right; }
+
+@media screen and (max-width: 560px) {
+  footer {
+    text-align: center; } }
 
 /* NAV */
 header nav, footer nav {

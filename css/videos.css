@@ -8,6 +8,14 @@ h3 {
   border-bottom: solid 1px #bbb;
   display: inline-block; }
 
+@media screen and (max-width: 560px) {
+  div.videos {
+    text-align: center; }
+    div.videos img {
+      float: none; }
+    div.videos p {
+      display: none; } }
+
 h5 {
   color: #bbb; }
 

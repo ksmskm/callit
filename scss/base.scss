@@ -1,3 +1,5 @@
+$break-mobile: 560px;
+
 /* HEADER & FOOTER */
 header, footer {
   background-color: #ddd;
@@ -6,6 +8,12 @@ header, footer {
   .wrapper {
     padding: 10px;
   }
+
+  @media max-width: $break-mobile {
+    footer {
+      text-align: center;
+    }
+  }  
 }
 
 header {
