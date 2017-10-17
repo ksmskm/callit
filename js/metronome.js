@@ -32,7 +32,7 @@ class Metronome {
       alert('please add patterns');
     } else {
       this.initialTime = new Date().getTime();
-      this.interval = 60000 / freq; 
+      this.interval = 60000 / freq;
       this.pattern = { name: 8, count: 8 }; // count in 8 beats to start.
       this.beat = 1;
       this.elapsed = false;
@@ -41,19 +41,19 @@ class Metronome {
   }
 
   processInterval () {
-    if (this.beat === this.pattern.count) {  
+    if (this.beat === this.pattern.count) {
       this.pattern = this.patterns.randomPattern();
       this.speech.speakMsg(this.pattern.name);
       this.beat = 1;
     } else {
       this.speech.speakMsg(this.beat);
-      this.beat += 1;         
+      this.beat += 1;
     }
 
     this.elapsed = this.elapsed === false ? 0 : this.elapsed + this.interval; // handles fencepost case
     let error = new Date().getTime() - this.initialTime - this.elapsed;
     let adjusted = this.interval - error;
-    this.timeout = window.setTimeout(() => this.processInterval(), adjusted);     
+    this.timeout = window.setTimeout(() => this.processInterval(), adjusted);
   }
 
   stop () {
@@ -62,4 +62,4 @@ class Metronome {
   }
 }
 
-export default Metronome
+export default Metronome;

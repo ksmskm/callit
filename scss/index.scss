@@ -86,6 +86,10 @@ select, input[type="text"], input[type="number"] {
 		padding: 5px 5px 0px 5px;
 	}
 
+  label, input {
+    margin-left: 5px;
+  }
+
   .name, .count {
     display: inline-block;  
     vertical-align: middle;
