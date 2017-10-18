@@ -21257,12 +21257,10 @@ var PatternList = function (_React$Component) {
   _createClass(PatternList, [{
     key: 'render',
     value: function render() {
-      var patterns = [];
-
-      patterns = this.props.patterns.map(function (pattern) {
+      var patterns = this.props.patterns.map(function (pattern, index) {
         // Each List Item Component needs a key attribute for uniqueness:
         // http://facebook.github.io/react/docs/multiple-components.html#dynamic-children
-        return _react2.default.createElement(_Pattern2.default, { key: pattern.id, pattern: pattern });
+        return _react2.default.createElement(_Pattern2.default, { key: index, pattern: pattern, handleRemove: this.props.handleRemove });
       }.bind(this));
 
       return _react2.default.createElement(
@@ -21277,19 +21275,8 @@ var PatternList = function (_React$Component) {
 }(_react2.default.Component);
 
 PatternList.propTypes = {
-  patterns: _propTypes2.default.array
-};
-
-PatternList.defaultProps = {
-  patterns: [{
-    id: 0,
-    name: 'Left Side Pass',
-    count: 6
-  }, {
-    id: 1,
-    name: 'Hammer Lock',
-    count: 6
-  }]
+  patterns: _propTypes2.default.array,
+  handleRemove: _propTypes2.default.func
 };
 
 module.exports = PatternList;
@@ -21322,13 +21309,21 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Pattern = function (_React$Component) {
   _inherits(Pattern, _React$Component);
 
-  function Pattern() {
+  function Pattern(props) {
     _classCallCheck(this, Pattern);
 
-    return _possibleConstructorReturn(this, (Pattern.__proto__ || Object.getPrototypeOf(Pattern)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (Pattern.__proto__ || Object.getPrototypeOf(Pattern)).call(this, props));
+
+    _this.delete = _this.delete.bind(_this);
+    return _this;
   }
 
   _createClass(Pattern, [{
+    key: 'delete',
+    value: function _delete() {
+      this.props.handleRemove(this.props.pattern.id);
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -21344,7 +21339,7 @@ var Pattern = function (_React$Component) {
           ),
           _react2.default.createElement(
             'button',
-            { className: 'delete', type: 'button' },
+            { onClick: this.delete, className: 'delete', type: 'button' },
             'delete'
           )
         )
@@ -21356,7 +21351,8 @@ var Pattern = function (_React$Component) {
 }(_react2.default.Component);
 
 Pattern.propTypes = {
-  pattern: _propTypes2.default.object.isRequired
+  pattern: _propTypes2.default.object.isRequired,
+  handleRemove: _propTypes2.default.func
 };
 
 module.exports = Pattern;
@@ -21519,7 +21515,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var id = 0;
+window.id = 2;
 
 var PatternContainer = function (_React$Component) {
   _inherits(PatternContainer, _React$Component);
@@ -21540,24 +21536,29 @@ var PatternContainer = function (_React$Component) {
         count: 6
       }]
     };
-    _this.handlePatternAdd = _this.handlePatternAdd.bind(_this);
+    _this.handleAdd = _this.handleAdd.bind(_this);
+    _this.handleRemove = _this.handleRemove.bind(_this);
     return _this;
   }
 
   _createClass(PatternContainer, [{
-    key: 'createPattern',
-    value: function createPattern(name, count) {
-      return {
-        id: id++,
+    key: 'handleAdd',
+    value: function handleAdd(name, count) {
+      var pattern = {
+        id: window.id++,
         name: name,
         count: count
       };
+      this.state.patterns.push(pattern);
+      this.setState({ patterns: this.state.patterns });
     }
   }, {
-    key: 'handlePatternAdd',
-    value: function handlePatternAdd(name, count) {
-      var patterns = this.state.patterns.concat(this.createPattern(name, count));
-      this.setState({ patterns: patterns });
+    key: 'handleRemove',
+    value: function handleRemove(id) {
+      var remainder = this.state.patterns.filter(function (pattern) {
+        if (pattern.id !== id) return pattern;
+      });
+      this.setState({ patterns: remainder });
     }
   }, {
     key: 'render',
@@ -21573,11 +21574,11 @@ var PatternContainer = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'patterns-body' },
-          _react2.default.createElement(_PatternInput2.default, { handleSubmit: this.handlePatternAdd }),
+          _react2.default.createElement(_PatternInput2.default, { handleSubmit: this.handleAdd }),
           _react2.default.createElement(
             'div',
             { className: 'pattern-list' },
-            _react2.default.createElement(_PatternList2.default, { patterns: this.props.patterns })
+            _react2.default.createElement(_PatternList2.default, { patterns: this.state.patterns, handleRemove: this.handleRemove })
           )
         )
       );

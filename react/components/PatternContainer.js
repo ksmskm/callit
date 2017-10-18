@@ -2,7 +2,7 @@ import React from 'react';
 import PatternList from './PatternList';
 import PatternInput from './PatternInput';
 
-var id = 0;
+window.id = 2;
 
 class PatternContainer extends React.Component {
 
@@ -21,20 +21,25 @@ class PatternContainer extends React.Component {
         }
       ]
     };
-    this.handlePatternAdd = this.handlePatternAdd.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
   }
 
-  createPattern (name, count) {
-    return {
-      id: id++,
+  handleAdd (name, count) {
+    let pattern = {
+      id: window.id++,
       name: name,
       count: count
     };
+    this.state.patterns.push(pattern);
+    this.setState({ patterns: this.state.patterns });
   }
 
-  handlePatternAdd (name, count) {
-    let patterns = this.state.patterns.concat(this.createPattern(name, count));
-    this.setState({ patterns: patterns });
+  handleRemove (id) {
+    const remainder = this.state.patterns.filter((pattern) => {
+      if (pattern.id !== id) return pattern;
+    });
+    this.setState({ patterns: remainder });
   }
 
   render () {
@@ -42,10 +47,10 @@ class PatternContainer extends React.Component {
       <div className="patterns">
         <h3>Patterns</h3>
         <div className="patterns-body">
-          <PatternInput handleSubmit={this.handlePatternAdd} />
+          <PatternInput handleSubmit={this.handleAdd} />
 
           <div className="pattern-list">
-            <PatternList patterns={this.props.patterns} />
+            <PatternList patterns={this.state.patterns} handleRemove={this.handleRemove} />
           </div>
         </div>
       </div>

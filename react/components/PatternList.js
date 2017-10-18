@@ -5,12 +5,10 @@ import Pattern from './Pattern';
 class PatternList extends React.Component {
 
   render () {
-    var patterns = [];
-
-    patterns = this.props.patterns.map((function (pattern) {
+    var patterns = this.props.patterns.map((function (pattern, index) {
       // Each List Item Component needs a key attribute for uniqueness:
       // http://facebook.github.io/react/docs/multiple-components.html#dynamic-children
-      return <Pattern key={pattern.id} pattern={pattern} />;
+      return <Pattern key={index} pattern={pattern} handleRemove={this.props.handleRemove} />;
     }).bind(this));
 
     return (
@@ -22,21 +20,8 @@ class PatternList extends React.Component {
 }
 
 PatternList.propTypes = {
-  patterns: PropTypes.array
-};
-
-PatternList.defaultProps = {
-  patterns: [
-    {
-      id: 0,
-      name: 'Left Side Pass',
-      count: 6
-    }, {
-      id: 1,
-      name: 'Hammer Lock',
-      count: 6
-    }
-  ]
+  patterns: PropTypes.array,
+  handleRemove: PropTypes.func
 };
 
 module.exports = PatternList;
