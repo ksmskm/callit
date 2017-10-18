@@ -992,21 +992,63 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var App = function (_React$Component) {
   _inherits(App, _React$Component);
 
-  function App() {
+  function App(props) {
     _classCallCheck(this, App);
 
-    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+    _this.state = {
+      message: new SpeechSynthesisUtterance(),
+      patterns: [{
+        name: 'Left Side Pass',
+        count: 6
+      }, {
+        name: 'Hammer Lock',
+        count: 6
+      }, {
+        name: 'Whip',
+        count: 8
+      }]
+    };
+    _this.handleAdd = _this.handleAdd.bind(_this);
+    _this.handleRemove = _this.handleRemove.bind(_this);
+    return _this;
   }
 
   _createClass(App, [{
+    key: 'handleAdd',
+    value: function handleAdd(name, count) {
+      var pattern = {
+        name: name,
+        count: count
+      };
+      this.state.patterns.push(pattern);
+      this.setState({ patterns: this.state.patterns });
+    }
+  }, {
+    key: 'handleRemove',
+    value: function handleRemove(name) {
+      var remainder = this.state.patterns.filter(function (pattern) {
+        if (pattern.name !== name) return pattern;
+      });
+      this.setState({ patterns: remainder });
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_Speaker2.default, null),
-        _react2.default.createElement(_PatternContainer2.default, null),
-        _react2.default.createElement(_Metronome2.default, null)
+        _react2.default.createElement(_Speaker2.default, { message: this.state.message }),
+        _react2.default.createElement(_PatternContainer2.default, {
+          patterns: this.state.patterns,
+          handleAdd: this.handleAdd,
+          handleRemove: this.handleRemove
+        }),
+        _react2.default.createElement(_Metronome2.default, {
+          patterns: this.state.patterns,
+          message: this.state.message
+        })
       );
     }
   }]);
@@ -21258,8 +21300,6 @@ var PatternList = function (_React$Component) {
     key: 'render',
     value: function render() {
       var patterns = this.props.patterns.map(function (pattern, index) {
-        // Each List Item Component needs a key attribute for uniqueness:
-        // http://facebook.github.io/react/docs/multiple-components.html#dynamic-children
         return _react2.default.createElement(_Pattern2.default, { key: index, pattern: pattern, handleRemove: this.props.handleRemove });
       }.bind(this));
 
@@ -21275,8 +21315,8 @@ var PatternList = function (_React$Component) {
 }(_react2.default.Component);
 
 PatternList.propTypes = {
-  patterns: _propTypes2.default.array,
-  handleRemove: _propTypes2.default.func
+  patterns: _propTypes2.default.array.isRequired,
+  handleRemove: _propTypes2.default.func.isRequired
 };
 
 module.exports = PatternList;
@@ -21321,7 +21361,7 @@ var Pattern = function (_React$Component) {
   _createClass(Pattern, [{
     key: 'delete',
     value: function _delete() {
-      this.props.handleRemove(this.props.pattern.id);
+      this.props.handleRemove(this.props.pattern.name);
     }
   }, {
     key: 'render',
@@ -21352,7 +21392,7 @@ var Pattern = function (_React$Component) {
 
 Pattern.propTypes = {
   pattern: _propTypes2.default.object.isRequired,
-  handleRemove: _propTypes2.default.func
+  handleRemove: _propTypes2.default.func.isRequired
 };
 
 module.exports = Pattern;
@@ -21419,6 +21459,10 @@ var PatternInput = function (_React$Component) {
         count: this.state.count
       };
       this.props.handleSubmit(val.name, val.count);
+      this.setState({
+        name: '',
+        count: 6
+      });
     }
   }, {
     key: 'render',
@@ -21478,12 +21522,6 @@ PatternInput.propTypes = {
   handleSubmit: _propTypes2.default.func.isRequired
 };
 
-PatternInput.defaultProps = {
-  handleSubmit: function handleSubmit(name, count) {
-    console.log('dumby input submit', name, count);
-  }
-};
-
 module.exports = PatternInput;
 
 /***/ }),
@@ -21498,6 +21536,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(29);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _PatternList = __webpack_require__(33);
 
@@ -21515,52 +21557,16 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-window.id = 2;
-
 var PatternContainer = function (_React$Component) {
   _inherits(PatternContainer, _React$Component);
 
-  function PatternContainer(props) {
+  function PatternContainer() {
     _classCallCheck(this, PatternContainer);
 
-    var _this = _possibleConstructorReturn(this, (PatternContainer.__proto__ || Object.getPrototypeOf(PatternContainer)).call(this, props));
-
-    _this.state = {
-      patterns: [{
-        id: 0,
-        name: 'Left Side Pass',
-        count: 6
-      }, {
-        id: 1,
-        name: 'Hammer Lock',
-        count: 6
-      }]
-    };
-    _this.handleAdd = _this.handleAdd.bind(_this);
-    _this.handleRemove = _this.handleRemove.bind(_this);
-    return _this;
+    return _possibleConstructorReturn(this, (PatternContainer.__proto__ || Object.getPrototypeOf(PatternContainer)).apply(this, arguments));
   }
 
   _createClass(PatternContainer, [{
-    key: 'handleAdd',
-    value: function handleAdd(name, count) {
-      var pattern = {
-        id: window.id++,
-        name: name,
-        count: count
-      };
-      this.state.patterns.push(pattern);
-      this.setState({ patterns: this.state.patterns });
-    }
-  }, {
-    key: 'handleRemove',
-    value: function handleRemove(id) {
-      var remainder = this.state.patterns.filter(function (pattern) {
-        if (pattern.id !== id) return pattern;
-      });
-      this.setState({ patterns: remainder });
-    }
-  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -21574,11 +21580,11 @@ var PatternContainer = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'patterns-body' },
-          _react2.default.createElement(_PatternInput2.default, { handleSubmit: this.handleAdd }),
+          _react2.default.createElement(_PatternInput2.default, { handleSubmit: this.props.handleAdd }),
           _react2.default.createElement(
             'div',
             { className: 'pattern-list' },
-            _react2.default.createElement(_PatternList2.default, { patterns: this.state.patterns, handleRemove: this.handleRemove })
+            _react2.default.createElement(_PatternList2.default, { patterns: this.props.patterns, handleRemove: this.props.handleRemove })
           )
         )
       );
@@ -21587,6 +21593,12 @@ var PatternContainer = function (_React$Component) {
 
   return PatternContainer;
 }(_react2.default.Component);
+
+PatternContainer.propTypes = {
+  patterns: _propTypes2.default.array.isRequired,
+  handleAdd: _propTypes2.default.func.isRequired,
+  handleRemove: _propTypes2.default.func.isRequired
+};
 
 module.exports = PatternContainer;
 
@@ -21603,6 +21615,10 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = __webpack_require__(29);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21614,33 +21630,88 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Speaker = function (_React$Component) {
   _inherits(Speaker, _React$Component);
 
-  function Speaker() {
+  function Speaker(props) {
     _classCallCheck(this, Speaker);
 
-    return _possibleConstructorReturn(this, (Speaker.__proto__ || Object.getPrototypeOf(Speaker)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (Speaker.__proto__ || Object.getPrototypeOf(Speaker)).call(this, props));
+
+    _this.state = {
+      voices: []
+    };
+
+    _this.setupMessage = _this.setupMessage.bind(_this);
+    _this.registerDOMNodes = _this.registerDOMNodes.bind(_this);
+    _this.attachEventListeners = _this.attachEventListeners.bind(_this);
+    _this.populateVoices = _this.populateVoices.bind(_this);
+    _this.handleVoiceChange = _this.handleVoiceChange.bind(_this);
+    return _this;
   }
 
   _createClass(Speaker, [{
-    key: "render",
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.registerDOMNodes();
+      this.attachEventListeners();
+      this.setupMessage();
+    }
+  }, {
+    key: 'setupMessage',
+    value: function setupMessage() {
+      this.props.message.rate = 1.4;
+    }
+  }, {
+    key: 'registerDOMNodes',
+    value: function registerDOMNodes(options) {
+      this.voicesDropdown = document.querySelector('[name="voice"]');
+      this.toggleButton = document.querySelector('.speaker button.toggle');
+    }
+  }, {
+    key: 'attachEventListeners',
+    value: function attachEventListeners(options) {
+      var _this2 = this;
+
+      speechSynthesis.addEventListener('voiceschanged', function () {
+        return _this2.populateVoices();
+      });
+    }
+  }, {
+    key: 'populateVoices',
+    value: function populateVoices() {
+      this.setState({
+        voices: speechSynthesis.getVoices().filter(function (voice) {
+          return voice.lang.includes('en');
+        })
+      });
+      this.voicesDropdown.innerHTML = this.state.voices.map(function (voice) {
+        return '<option value="' + voice.name + '">' + voice.name + ' (' + voice.lang + ')</option>';
+      }).join('');
+    }
+  }, {
+    key: 'handleVoiceChange',
+    value: function handleVoiceChange(e) {
+      this.props.message.voice = this.state.voices[this.voicesDropdown.selectedIndex];
+    }
+  }, {
+    key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        "div",
-        { className: "speaker" },
+        'div',
+        { className: 'speaker' },
         _react2.default.createElement(
-          "h3",
+          'h3',
           null,
-          "Voice"
+          'Voice'
         ),
         _react2.default.createElement(
-          "form",
-          { action: "", name: "speaker" },
+          'form',
+          { action: '', name: 'speaker' },
           _react2.default.createElement(
-            "select",
-            { name: "voice", id: "voice" },
+            'select',
+            { name: 'voice', id: 'voice', onChange: this.handleVoiceChange },
             _react2.default.createElement(
-              "option",
-              { defaultValue: "" },
-              "Select a Voice"
+              'option',
+              { defaultValue: '' },
+              'Select a Voice'
             )
           )
         )
@@ -21650,6 +21721,10 @@ var Speaker = function (_React$Component) {
 
   return Speaker;
 }(_react2.default.Component);
+
+Speaker.propTypes = {
+  message: _propTypes2.default.object.isRequired
+};
 
 module.exports = Speaker;
 
@@ -21666,6 +21741,10 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = __webpack_require__(29);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21677,43 +21756,121 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Metronome = function (_React$Component) {
   _inherits(Metronome, _React$Component);
 
-  function Metronome() {
+  function Metronome(props) {
     _classCallCheck(this, Metronome);
 
-    return _possibleConstructorReturn(this, (Metronome.__proto__ || Object.getPrototypeOf(Metronome)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (Metronome.__proto__ || Object.getPrototypeOf(Metronome)).call(this, props));
+
+    _this.start = _this.start.bind(_this);
+    _this.processInterval = _this.processInterval.bind(_this);
+    _this.stop = _this.stop.bind(_this);
+    _this.speakMsg = _this.speakMsg.bind(_this);
+    _this.handleBPMChange = _this.handleBPMChange.bind(_this);
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
+    return _this;
   }
 
   _createClass(Metronome, [{
-    key: "render",
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.running = false;
+      this.interval = 60000 / 88;
+    }
+  }, {
+    key: 'start',
+    value: function start() {
+      if (Object.keys(this.props.patterns).length === 0) {
+        alert('please add patterns');
+      } else {
+        this.initialTime = new Date().getTime();
+        this.pattern = { name: 8, count: 8 }; // count in 8 beats to start.
+        this.beat = 1;
+        this.elapsed = false;
+        this.timeout = this.processInterval();
+      }
+    }
+  }, {
+    key: 'processInterval',
+    value: function processInterval() {
+      var _this2 = this;
+
+      if (this.beat >= this.pattern.count) {
+        var i = Math.floor(Math.random() * Object.keys(this.props.patterns).length);
+        this.pattern = this.props.patterns[i];
+        this.speakMsg(this.pattern.name);
+        this.beat = 1;
+      } else {
+        this.speakMsg(this.beat);
+        this.beat += 1;
+      }
+
+      this.elapsed = this.elapsed === false ? 0 : this.elapsed + this.interval; // handles fencepost case
+      var error = new Date().getTime() - this.initialTime - this.elapsed;
+      var adjusted = this.interval - error;
+      this.timeout = window.setTimeout(function () {
+        return _this2.processInterval();
+      }, adjusted);
+    }
+  }, {
+    key: 'stop',
+    value: function stop() {
+      window.clearTimeout(this.timeout);
+      this.elapsed = false;
+    }
+  }, {
+    key: 'speakMsg',
+    value: function speakMsg(text) {
+      speechSynthesis.cancel();
+      this.props.message.text = text;
+      speechSynthesis.speak(this.props.message);
+    }
+  }, {
+    key: 'handleBPMChange',
+    value: function handleBPMChange(e) {
+      this.interval = 60000 / e.target.value;
+    }
+  }, {
+    key: 'handleSubmit',
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      if (this.running === false) {
+        this.start();
+      } else {
+        this.stop();
+      }
+      this.running = !this.running;
+    }
+  }, {
+    key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        "div",
-        { className: "metronome" },
+        'div',
+        { className: 'metronome' },
         _react2.default.createElement(
-          "h3",
+          'h3',
           null,
-          "Metronome"
+          'Metronome'
         ),
         _react2.default.createElement(
-          "form",
-          { action: "", name: "metronome" },
+          'form',
+          { action: '', name: 'metronome', onSubmit: this.handleSubmit },
           _react2.default.createElement(
-            "div",
+            'div',
             null,
             _react2.default.createElement(
-              "label",
-              { htmlFor: "bpm" },
-              "BPM:"
+              'label',
+              { htmlFor: 'bpm' },
+              'BPM:'
             ),
-            _react2.default.createElement("input", { type: "number", name: "bpm", id: "bpm", step: "2", defaultValue: "88", min: "60", max: "144" })
+            _react2.default.createElement('input', { onChange: this.handleBPMChange, type: 'number', name: 'bpm', id: 'bpm', step: '2', defaultValue: '88', min: '60', max: '144' })
           ),
           _react2.default.createElement(
-            "div",
-            { className: "button" },
+            'div',
+            { className: 'button' },
             _react2.default.createElement(
-              "button",
-              { className: "toggle", type: "button" },
-              "Start/Stop"
+              'button',
+              { className: 'toggle', type: 'submit' },
+              'Start/Stop'
             )
           )
         )
@@ -21723,6 +21880,11 @@ var Metronome = function (_React$Component) {
 
   return Metronome;
 }(_react2.default.Component);
+
+Metronome.propTypes = {
+  message: _propTypes2.default.object.isRequired,
+  patterns: _propTypes2.default.array.isRequired
+};
 
 module.exports = Metronome;
 

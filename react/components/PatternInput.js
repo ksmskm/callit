@@ -29,6 +29,10 @@ class PatternInput extends React.Component {
       count: this.state.count
     };
     this.props.handleSubmit(val.name, val.count);
+    this.setState({
+      name: '',
+      count: 6
+    });
   }
 
   render () {
@@ -62,12 +66,6 @@ class PatternInput extends React.Component {
 
 PatternInput.propTypes = {
   handleSubmit: PropTypes.func.isRequired
-};
-
-PatternInput.defaultProps = {
-  handleSubmit: function (name, count) {
-    console.log('dumby input submit', name, count);
-  }
 };
 
 module.exports = PatternInput;

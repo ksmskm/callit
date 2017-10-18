@@ -6,8 +6,6 @@ class PatternList extends React.Component {
 
   render () {
     var patterns = this.props.patterns.map((function (pattern, index) {
-      // Each List Item Component needs a key attribute for uniqueness:
-      // http://facebook.github.io/react/docs/multiple-components.html#dynamic-children
       return <Pattern key={index} pattern={pattern} handleRemove={this.props.handleRemove} />;
     }).bind(this));
 
@@ -20,8 +18,8 @@ class PatternList extends React.Component {
 }
 
 PatternList.propTypes = {
-  patterns: PropTypes.array,
-  handleRemove: PropTypes.func
+  patterns: PropTypes.array.isRequired,
+  handleRemove: PropTypes.func.isRequired
 };
 
 module.exports = PatternList;

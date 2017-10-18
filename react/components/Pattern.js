@@ -4,12 +4,11 @@ import PropTypes from 'prop-types';
 class Pattern extends React.Component {
   constructor (props) {
     super(props);
-
     this.delete = this.delete.bind(this);
   }
 
   delete () {
-    this.props.handleRemove(this.props.pattern.id);
+    this.props.handleRemove(this.props.pattern.name);
   }
 
   render () {
@@ -26,7 +25,7 @@ class Pattern extends React.Component {
 
 Pattern.propTypes = {
   pattern: PropTypes.object.isRequired,
-  handleRemove: PropTypes.func
+  handleRemove: PropTypes.func.isRequired
 };
 
 module.exports = Pattern;
