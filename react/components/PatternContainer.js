@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import PatternList from './PatternList';
 import PatternInput from './PatternInput';
 
@@ -7,13 +6,22 @@ var id = 0;
 
 class PatternContainer extends React.Component {
 
-  getDefaultProps () {
-    return {
+  constructor (props) {
+    super(props);
+    this.state = {
       patterns: [
-        this.createPattern('Left Side Pass', 6),
-        this.createPattern('Hammer Lock', 6)
+        {
+          id: 0,
+          name: 'Left Side Pass',
+          count: 6
+        }, {
+          id: 1,
+          name: 'Hammer Lock',
+          count: 6
+        }
       ]
     };
+    this.handlePatternAdd = this.handlePatternAdd.bind(this);
   }
 
   createPattern (name, count) {
@@ -25,17 +33,8 @@ class PatternContainer extends React.Component {
   }
 
   handlePatternAdd (name, count) {
-    this.setProps({
-      todos: this.props.patterns.concat(this.createPattern(name, count))
-    });
-  }
-
-  handlePatternRemoved (pattern) {
-    this.setProps({
-      patterns: this.props.patterns.filter(function (msg) {
-        return pattern.id !== msg.id;
-      })
-    });
+    let patterns = this.state.patterns.concat(this.createPattern(name, count));
+    this.setState({ patterns: patterns });
   }
 
   render () {
@@ -43,7 +42,7 @@ class PatternContainer extends React.Component {
       <div className="patterns">
         <h3>Patterns</h3>
         <div className="patterns-body">
-          <PatternInput onInputSubmit={this.handlePatternAdd} />
+          <PatternInput handleSubmit={this.handlePatternAdd} />
 
           <div className="pattern-list">
             <PatternList patterns={this.props.patterns} />
@@ -53,9 +52,5 @@ class PatternContainer extends React.Component {
     );
   }
 }
-
-PatternContainer.propTypes = {
-  patterns: PropTypes.list
-};
 
 module.exports = PatternContainer;

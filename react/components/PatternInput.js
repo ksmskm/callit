@@ -2,51 +2,57 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class PatternInput extends React.Component {
-  getDefaultProps () {
-    return {
-      onInputSubmit: function () {
-        console.log('dumby input submit');
-      }
+
+  constructor (props) {
+    super(props);
+    this.state = {
+      name: '',
+      count: 6
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleCountChange = this.handleCountChange.bind(this);
   }
 
-  getInputValue () {
-    return {
-      name: this.refs.nameInput.getDOMNode().value,
-      count: this.refs.countInput.getDOMNode().value
+  handleNameChange (e) {
+    this.setState({ name: e.target.value });
+  }
+
+  handleCountChange (e) {
+    this.setState({ count: e.target.value });
+  }
+
+  handleSubmit (e) {
+    e.preventDefault();
+    let val = {
+      name: this.state.name,
+      count: this.state.count
     };
-  }
-
-  clearInputValue () {
-    this.refs.nameInput.getDOMNode().value = '';
-  }
-
-  handleSubmit () {
-    let val = this.getInputValue();
-    this.props.onInputSubmit(val);
+    this.props.handleSubmit(val.name, val.count);
   }
 
   render () {
     return (
       <div className="pattern-form">
-        <form action="" name="patterns" method="post">
+        <form onSubmit={this.handleSubmit} action="" name="patterns" method="post">
           <div className="name">
             <label htmlFor="pattern_name">Name:</label>
-            <input ref={(input) => { this.nameInput = input; }} type="text" id="pattern_name" name="name" />
+            <input value={this.state.name} onChange={this.handleNameChange}
+             type="text" id="pattern_name" name="name" />
           </div>
           <div className="count">
             <label htmlFor="pattern_count">Count:</label>
             <input
-              ref={(input) => { this.countInput = input; }}
+              value={this.state.count}
+              onChange={this.handleCountChange}
               type="number"
               id="pattern_count"
               name="count"
               step="2"
-              defaultValue="6"
               min="2" max="16" />
           </div>
           <div className="button">
-            <button onClick={this.handleSubmit} className="addPattern" type="submit">Submit</button>
+            <button className="addPattern" type="submit">Submit</button>
           </div>
         </form>
       </div>
@@ -55,7 +61,13 @@ class PatternInput extends React.Component {
 }
 
 PatternInput.propTypes = {
-  onInputSubmit: PropTypes.function
+  handleSubmit: PropTypes.func.isRequired
+};
+
+PatternInput.defaultProps = {
+  handleSubmit: function (name, count) {
+    console.log('dumby input submit', name, count);
+  }
 };
 
 module.exports = PatternInput;

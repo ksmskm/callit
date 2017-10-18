@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Pattern from './Pattern';
 
 class PatternList extends React.Component {
+
   render () {
     var patterns = [];
 
@@ -21,7 +22,21 @@ class PatternList extends React.Component {
 }
 
 PatternList.propTypes = {
-  patterns: PropTypes.list.isRequired
+  patterns: PropTypes.array
+};
+
+PatternList.defaultProps = {
+  patterns: [
+    {
+      id: 0,
+      name: 'Left Side Pass',
+      count: 6
+    }, {
+      id: 1,
+      name: 'Hammer Lock',
+      count: 6
+    }
+  ]
 };
 
 module.exports = PatternList;
