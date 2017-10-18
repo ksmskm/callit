@@ -1,3 +1,4 @@
+// setup state
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -19,19 +20,22 @@ class Metronome extends React.Component {
   }
 
   start () {
-    if (Object.keys(this.props.patterns).length === 0) {
-      alert('please add patterns');
+    if (this.props.patterns.length === 0) {
+      alert('please add patterns!');
     } else {
       this.initialTime = new Date().getTime();
       this.pattern = { name: 8, count: 8 }; // count in 8 beats to start.
       this.beat = 1;
       this.elapsed = false;
       this.timeout = this.processInterval();
+      this.running = !this.running;
     }
   }
 
   processInterval () {
-    if (this.beat >= this.pattern.count) {
+    if (this.props.patterns.length === 0) {
+      this.stop();
+    } else if (this.beat >= this.pattern.count) {
       let i = Math.floor(Math.random() * Object.keys(this.props.patterns).length);      
       this.pattern = this.props.patterns[i];
       this.speakMsg(this.pattern.name);
@@ -50,6 +54,7 @@ class Metronome extends React.Component {
   stop () {
     window.clearTimeout(this.timeout);
     this.elapsed = false;
+    this.running = !this.running;
   }
 
   speakMsg (text) {
@@ -68,8 +73,7 @@ class Metronome extends React.Component {
       this.start();
     } else {
       this.stop();
-    }
-    this.running = !this.running;    
+    }    
   }
 
   render () {

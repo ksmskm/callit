@@ -21751,7 +21751,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // setup state
+
 
 var Metronome = function (_React$Component) {
   _inherits(Metronome, _React$Component);
@@ -21779,14 +21780,15 @@ var Metronome = function (_React$Component) {
   }, {
     key: 'start',
     value: function start() {
-      if (Object.keys(this.props.patterns).length === 0) {
-        alert('please add patterns');
+      if (this.props.patterns.length === 0) {
+        alert('please add patterns!');
       } else {
         this.initialTime = new Date().getTime();
         this.pattern = { name: 8, count: 8 }; // count in 8 beats to start.
         this.beat = 1;
         this.elapsed = false;
         this.timeout = this.processInterval();
+        this.running = !this.running;
       }
     }
   }, {
@@ -21794,7 +21796,9 @@ var Metronome = function (_React$Component) {
     value: function processInterval() {
       var _this2 = this;
 
-      if (this.beat >= this.pattern.count) {
+      if (this.props.patterns.length === 0) {
+        this.stop();
+      } else if (this.beat >= this.pattern.count) {
         var i = Math.floor(Math.random() * Object.keys(this.props.patterns).length);
         this.pattern = this.props.patterns[i];
         this.speakMsg(this.pattern.name);
@@ -21816,6 +21820,7 @@ var Metronome = function (_React$Component) {
     value: function stop() {
       window.clearTimeout(this.timeout);
       this.elapsed = false;
+      this.running = !this.running;
     }
   }, {
     key: 'speakMsg',
@@ -21838,7 +21843,6 @@ var Metronome = function (_React$Component) {
       } else {
         this.stop();
       }
-      this.running = !this.running;
     }
   }, {
     key: 'render',
