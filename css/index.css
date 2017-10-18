@@ -106,6 +106,7 @@ div.pattern {
   *zoom: 1;
   position: relative; }
   div.pattern span {
+    text-transform: capitalize;
     position: absolute;
     top: 5px; }
   div.pattern:before, div.pattern:after {

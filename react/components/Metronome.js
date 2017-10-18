@@ -6,6 +6,10 @@ class Metronome extends React.Component {
   constructor (props) {
     super(props);
 
+    this.state = {
+      bpm: 88
+    };    
+
     this.start = this.start.bind(this);    
     this.processInterval = this.processInterval.bind(this);    
     this.stop = this.stop.bind(this);    
@@ -16,14 +20,13 @@ class Metronome extends React.Component {
 
   componentDidMount () {
     this.running = false;
-    this.interval = 60000 / 88;
   }
 
   start () {
     if (this.props.patterns.length === 0) {
       alert('please add patterns!');
     } else {
-      this.initialTime = new Date().getTime();
+      this.startTime = new Date().getTime();
       this.pattern = { name: 8, count: 8 }; // count in 8 beats to start.
       this.beat = 1;
       this.elapsed = false;
@@ -36,7 +39,7 @@ class Metronome extends React.Component {
     if (this.props.patterns.length === 0) {
       this.stop();
     } else if (this.beat >= this.pattern.count) {
-      let i = Math.floor(Math.random() * Object.keys(this.props.patterns).length);      
+      let i = Math.floor(Math.random() * this.props.patterns.length);      
       this.pattern = this.props.patterns[i];
       this.speakMsg(this.pattern.name);
       this.beat = 1;
@@ -45,9 +48,17 @@ class Metronome extends React.Component {
       this.beat += 1;
     }
 
-    this.elapsed = this.elapsed === false ? 0 : this.elapsed + this.interval; // handles fencepost case
-    let error = new Date().getTime() - this.initialTime - this.elapsed;
-    let adjusted = this.interval - error;
+    let interval = 60000 / this.state.bpm;
+
+    // handles fencepost case
+    if (this.elapsed === false) {
+      this.elapsed = 0;
+    } else {
+      this.elapsed += interval;
+    }
+
+    let error = new Date().getTime() - this.startTime - this.elapsed;
+    let adjusted = interval - error;
     this.timeout = window.setTimeout(() => this.processInterval(), adjusted);
   }
 
@@ -64,7 +75,7 @@ class Metronome extends React.Component {
   }    
 
   handleBPMChange (e) {
-    this.interval = 60000 / e.target.value;
+    this.setState({ bpm: e.target.value });    
   }
 
   handleSubmit (e) {
@@ -83,7 +94,10 @@ class Metronome extends React.Component {
         <form action="" name="metronome" onSubmit={this.handleSubmit} >
           <div>
             <label htmlFor="bpm">BPM:</label>
-            <input onChange={this.handleBPMChange} type="number" name="bpm" id="bpm" step="2" defaultValue="88" min="60" max="144" />
+            <input 
+              onChange={this.handleBPMChange} 
+              type="number" name="bpm" id="bpm" step="2" 
+              value={this.state.bpm} min="60" max="144" />
           </div>
           <div className="button">
             <button className="toggle" type="submit">Start/Stop</button>

@@ -1000,13 +1000,13 @@ var App = function (_React$Component) {
     _this.state = {
       message: new SpeechSynthesisUtterance(),
       patterns: [{
-        name: 'Left Side Pass',
+        name: 'left side pass',
         count: 6
       }, {
-        name: 'Hammer Lock',
+        name: 'hammer lock',
         count: 6
       }, {
-        name: 'Whip',
+        name: 'whip',
         count: 8
       }]
     };
@@ -1019,11 +1019,20 @@ var App = function (_React$Component) {
     key: 'handleAdd',
     value: function handleAdd(name, count) {
       var pattern = {
-        name: name,
+        name: name.toLowerCase(),
         count: count
       };
-      this.state.patterns.push(pattern);
-      this.setState({ patterns: this.state.patterns });
+
+      var names = this.state.patterns.map(function (pattern) {
+        return pattern.name;
+      });
+
+      if (names.includes(pattern.name)) {
+        alert('duplicate');
+      } else {
+        this.state.patterns.push(pattern);
+        this.setState({ patterns: this.state.patterns });
+      }
     }
   }, {
     key: 'handleRemove',
@@ -21762,6 +21771,10 @@ var Metronome = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Metronome.__proto__ || Object.getPrototypeOf(Metronome)).call(this, props));
 
+    _this.state = {
+      bpm: 88
+    };
+
     _this.start = _this.start.bind(_this);
     _this.processInterval = _this.processInterval.bind(_this);
     _this.stop = _this.stop.bind(_this);
@@ -21775,7 +21788,6 @@ var Metronome = function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.running = false;
-      this.interval = 60000 / 88;
     }
   }, {
     key: 'start',
@@ -21783,7 +21795,7 @@ var Metronome = function (_React$Component) {
       if (this.props.patterns.length === 0) {
         alert('please add patterns!');
       } else {
-        this.initialTime = new Date().getTime();
+        this.startTime = new Date().getTime();
         this.pattern = { name: 8, count: 8 }; // count in 8 beats to start.
         this.beat = 1;
         this.elapsed = false;
@@ -21799,7 +21811,7 @@ var Metronome = function (_React$Component) {
       if (this.props.patterns.length === 0) {
         this.stop();
       } else if (this.beat >= this.pattern.count) {
-        var i = Math.floor(Math.random() * Object.keys(this.props.patterns).length);
+        var i = Math.floor(Math.random() * this.props.patterns.length);
         this.pattern = this.props.patterns[i];
         this.speakMsg(this.pattern.name);
         this.beat = 1;
@@ -21808,9 +21820,17 @@ var Metronome = function (_React$Component) {
         this.beat += 1;
       }
 
-      this.elapsed = this.elapsed === false ? 0 : this.elapsed + this.interval; // handles fencepost case
-      var error = new Date().getTime() - this.initialTime - this.elapsed;
-      var adjusted = this.interval - error;
+      var interval = 60000 / this.state.bpm;
+
+      // handles fencepost case
+      if (this.elapsed === false) {
+        this.elapsed = 0;
+      } else {
+        this.elapsed += interval;
+      }
+
+      var error = new Date().getTime() - this.startTime - this.elapsed;
+      var adjusted = interval - error;
       this.timeout = window.setTimeout(function () {
         return _this2.processInterval();
       }, adjusted);
@@ -21832,7 +21852,7 @@ var Metronome = function (_React$Component) {
   }, {
     key: 'handleBPMChange',
     value: function handleBPMChange(e) {
-      this.interval = 60000 / e.target.value;
+      this.setState({ bpm: e.target.value });
     }
   }, {
     key: 'handleSubmit',
@@ -21866,7 +21886,10 @@ var Metronome = function (_React$Component) {
               { htmlFor: 'bpm' },
               'BPM:'
             ),
-            _react2.default.createElement('input', { onChange: this.handleBPMChange, type: 'number', name: 'bpm', id: 'bpm', step: '2', defaultValue: '88', min: '60', max: '144' })
+            _react2.default.createElement('input', {
+              onChange: this.handleBPMChange,
+              type: 'number', name: 'bpm', id: 'bpm', step: '2',
+              value: this.state.bpm, min: '60', max: '144' })
           ),
           _react2.default.createElement(
             'div',

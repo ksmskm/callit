@@ -11,13 +11,13 @@ class App extends React.Component {
     	message: new SpeechSynthesisUtterance(),
       patterns: [
         {
-          name: 'Left Side Pass',
+          name: 'left side pass',
           count: 6
         }, {
-          name: 'Hammer Lock',
+          name: 'hammer lock',
           count: 6
         }, {
-          name: 'Whip',
+          name: 'whip',
           count: 8
         }
       ]
@@ -28,11 +28,18 @@ class App extends React.Component {
 
   handleAdd (name, count) {
     let pattern = {
-      name: name,
+      name: name.toLowerCase(),
       count: count
     };
-    this.state.patterns.push(pattern);
-    this.setState({ patterns: this.state.patterns });
+
+    let names = this.state.patterns.map(pattern => pattern.name);
+    
+    if (names.includes(pattern.name)) {
+    	alert('duplicate');
+    } else {    	
+	    this.state.patterns.push(pattern);
+	    this.setState({ patterns: this.state.patterns });
+    }
   }
 
   handleRemove (name) {

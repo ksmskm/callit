@@ -139,6 +139,7 @@ div.pattern {
   position: relative;
   // vertically center the pattern name
   span {
+    text-transform: capitalize;
     position: absolute;
     top: 5px;
   }
