@@ -38,15 +38,19 @@ class App extends React.Component {
     	alert('duplicate');
     } else {    	
 	    this.state.patterns.push(pattern);
-	    this.setState({ patterns: this.state.patterns });
+	    this.setState((prevState) => {
+	    	return { patterns: prevState.patterns };
+	    });
     }
   }
 
   handleRemove (name) {
-    const remainder = this.state.patterns.filter((pattern) => {
-      if (pattern.name !== name) return pattern;
+    this.setState((prevState) => {	    
+	    let remainder = prevState.patterns.filter((pattern) => {
+	      if (pattern.name !== name) return pattern;
+	    });    	
+    	return { patterns: remainder };
     });
-    this.setState({ patterns: remainder });
   }
 
   render () {

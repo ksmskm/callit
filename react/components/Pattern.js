@@ -1,26 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class Pattern extends React.Component {
-  constructor (props) {
-    super(props);
-    this.delete = this.delete.bind(this);
-  }
-
-  delete () {
-    this.props.handleRemove(this.props.pattern.name);
-  }
-
-  render () {
-    return (
-      <li>
-        <div className="pattern">
-          <span>{this.props.pattern.name}</span>
-          <button onClick={this.delete} className="delete" type="button">delete</button>
-        </div>
-      </li>
-    );
-  }
+function Pattern (props) {
+  return (
+    <li>
+      <div className="pattern">
+        <span>{props.pattern.name}</span>
+        <button 
+          onClick={() => props.handleRemove(props.pattern.name)} 
+          className="delete">delete</button>
+      </div>
+    </li>
+  );
 }
 
 Pattern.propTypes = {

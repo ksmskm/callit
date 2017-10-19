@@ -8,12 +8,8 @@ class Metronome extends React.Component {
 
     this.state = {
       bpm: 88
-    };    
-
-    this.start = this.start.bind(this);    
-    this.processInterval = this.processInterval.bind(this);    
-    this.stop = this.stop.bind(this);    
-    this.speakMsg = this.speakMsg.bind(this); 
+    };
+    
     this.handleBPMChange = this.handleBPMChange.bind(this);  
     this.handleSubmit = this.handleSubmit.bind(this);  
   }
@@ -71,6 +67,7 @@ class Metronome extends React.Component {
   speakMsg (text) {
     speechSynthesis.cancel();
     this.props.message.text = text;
+    this.props.message.rate = 1.4;    
     speechSynthesis.speak(this.props.message);
   }    
 

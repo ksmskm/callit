@@ -3,21 +3,16 @@ import PropTypes from 'prop-types';
 import PatternList from './PatternList';
 import PatternInput from './PatternInput';
 
-class PatternContainer extends React.Component {
-  render () {
-    return (
-      <div className="patterns">
-        <h3>Patterns</h3>
-        <div className="patterns-body">
-          <PatternInput handleSubmit={this.props.handleAdd} />
-
-          <div className="pattern-list">
-            <PatternList patterns={this.props.patterns} handleRemove={this.props.handleRemove} />
-          </div>
-        </div>
+function PatternContainer (props) {
+  return (
+    <div className="patterns">
+      <h3>Patterns</h3>
+      <div className="patterns-body">
+        <PatternInput handleSubmit={props.handleAdd} />
+        <PatternList patterns={props.patterns} handleRemove={props.handleRemove} />
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 PatternContainer.propTypes = {

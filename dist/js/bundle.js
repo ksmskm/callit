@@ -1031,16 +1031,20 @@ var App = function (_React$Component) {
         alert('duplicate');
       } else {
         this.state.patterns.push(pattern);
-        this.setState({ patterns: this.state.patterns });
+        this.setState(function (prevState) {
+          return { patterns: prevState.patterns };
+        });
       }
     }
   }, {
     key: 'handleRemove',
     value: function handleRemove(name) {
-      var remainder = this.state.patterns.filter(function (pattern) {
-        if (pattern.name !== name) return pattern;
+      this.setState(function (prevState) {
+        var remainder = prevState.patterns.filter(function (pattern) {
+          if (pattern.name !== name) return pattern;
+        });
+        return { patterns: remainder };
       });
-      this.setState({ patterns: remainder });
     }
   }, {
     key: 'render',
@@ -21274,8 +21278,6 @@ module.exports = function() {
 "use strict";
 
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
@@ -21290,38 +21292,21 @@ var _Pattern2 = _interopRequireDefault(_Pattern);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function PatternList(props) {
+  var patterns = props.patterns.map(function (pattern, i) {
+    return _react2.default.createElement(_Pattern2.default, { key: i, pattern: pattern, handleRemove: props.handleRemove });
+  });
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var PatternList = function (_React$Component) {
-  _inherits(PatternList, _React$Component);
-
-  function PatternList() {
-    _classCallCheck(this, PatternList);
-
-    return _possibleConstructorReturn(this, (PatternList.__proto__ || Object.getPrototypeOf(PatternList)).apply(this, arguments));
-  }
-
-  _createClass(PatternList, [{
-    key: 'render',
-    value: function render() {
-      var patterns = this.props.patterns.map(function (pattern, index) {
-        return _react2.default.createElement(_Pattern2.default, { key: index, pattern: pattern, handleRemove: this.props.handleRemove });
-      }.bind(this));
-
-      return _react2.default.createElement(
-        'ul',
-        { id: 'pattern-list', className: 'list' },
-        patterns
-      );
-    }
-  }]);
-
-  return PatternList;
-}(_react2.default.Component);
+  return _react2.default.createElement(
+    'div',
+    { className: 'pattern-list' },
+    _react2.default.createElement(
+      'ul',
+      { id: 'pattern-list', className: 'list' },
+      patterns
+    )
+  );
+}
 
 PatternList.propTypes = {
   patterns: _propTypes2.default.array.isRequired,
@@ -21337,8 +21322,6 @@ module.exports = PatternList;
 "use strict";
 
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
@@ -21349,55 +21332,30 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Pattern = function (_React$Component) {
-  _inherits(Pattern, _React$Component);
-
-  function Pattern(props) {
-    _classCallCheck(this, Pattern);
-
-    var _this = _possibleConstructorReturn(this, (Pattern.__proto__ || Object.getPrototypeOf(Pattern)).call(this, props));
-
-    _this.delete = _this.delete.bind(_this);
-    return _this;
-  }
-
-  _createClass(Pattern, [{
-    key: 'delete',
-    value: function _delete() {
-      this.props.handleRemove(this.props.pattern.name);
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'li',
+function Pattern(props) {
+  return _react2.default.createElement(
+    'li',
+    null,
+    _react2.default.createElement(
+      'div',
+      { className: 'pattern' },
+      _react2.default.createElement(
+        'span',
         null,
-        _react2.default.createElement(
-          'div',
-          { className: 'pattern' },
-          _react2.default.createElement(
-            'span',
-            null,
-            this.props.pattern.name
-          ),
-          _react2.default.createElement(
-            'button',
-            { onClick: this.delete, className: 'delete', type: 'button' },
-            'delete'
-          )
-        )
-      );
-    }
-  }]);
-
-  return Pattern;
-}(_react2.default.Component);
+        props.pattern.name
+      ),
+      _react2.default.createElement(
+        'button',
+        {
+          onClick: function onClick() {
+            return props.handleRemove(props.pattern.name);
+          },
+          className: 'delete' },
+        'delete'
+      )
+    )
+  );
+}
 
 Pattern.propTypes = {
   pattern: _propTypes2.default.object.isRequired,
@@ -21540,8 +21498,6 @@ module.exports = PatternInput;
 "use strict";
 
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
@@ -21560,48 +21516,23 @@ var _PatternInput2 = _interopRequireDefault(_PatternInput);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var PatternContainer = function (_React$Component) {
-  _inherits(PatternContainer, _React$Component);
-
-  function PatternContainer() {
-    _classCallCheck(this, PatternContainer);
-
-    return _possibleConstructorReturn(this, (PatternContainer.__proto__ || Object.getPrototypeOf(PatternContainer)).apply(this, arguments));
-  }
-
-  _createClass(PatternContainer, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { className: 'patterns' },
-        _react2.default.createElement(
-          'h3',
-          null,
-          'Patterns'
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'patterns-body' },
-          _react2.default.createElement(_PatternInput2.default, { handleSubmit: this.props.handleAdd }),
-          _react2.default.createElement(
-            'div',
-            { className: 'pattern-list' },
-            _react2.default.createElement(_PatternList2.default, { patterns: this.props.patterns, handleRemove: this.props.handleRemove })
-          )
-        )
-      );
-    }
-  }]);
-
-  return PatternContainer;
-}(_react2.default.Component);
+function PatternContainer(props) {
+  return _react2.default.createElement(
+    'div',
+    { className: 'patterns' },
+    _react2.default.createElement(
+      'h3',
+      null,
+      'Patterns'
+    ),
+    _react2.default.createElement(
+      'div',
+      { className: 'patterns-body' },
+      _react2.default.createElement(_PatternInput2.default, { handleSubmit: props.handleAdd }),
+      _react2.default.createElement(_PatternList2.default, { patterns: props.patterns, handleRemove: props.handleRemove })
+    )
+  );
+}
 
 PatternContainer.propTypes = {
   patterns: _propTypes2.default.array.isRequired,
@@ -21647,36 +21578,12 @@ var Speaker = function (_React$Component) {
     _this.state = {
       voices: []
     };
-
-    _this.setupMessage = _this.setupMessage.bind(_this);
-    _this.registerDOMNodes = _this.registerDOMNodes.bind(_this);
-    _this.attachEventListeners = _this.attachEventListeners.bind(_this);
-    _this.populateVoices = _this.populateVoices.bind(_this);
-    _this.handleVoiceChange = _this.handleVoiceChange.bind(_this);
     return _this;
   }
 
   _createClass(Speaker, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.registerDOMNodes();
-      this.attachEventListeners();
-      this.setupMessage();
-    }
-  }, {
-    key: 'setupMessage',
-    value: function setupMessage() {
-      this.props.message.rate = 1.4;
-    }
-  }, {
-    key: 'registerDOMNodes',
-    value: function registerDOMNodes(options) {
-      this.voicesDropdown = document.querySelector('[name="voice"]');
-      this.toggleButton = document.querySelector('.speaker button.toggle');
-    }
-  }, {
-    key: 'attachEventListeners',
-    value: function attachEventListeners(options) {
       var _this2 = this;
 
       speechSynthesis.addEventListener('voiceschanged', function () {
@@ -21691,18 +21598,26 @@ var Speaker = function (_React$Component) {
           return voice.lang.includes('en');
         })
       });
-      this.voicesDropdown.innerHTML = this.state.voices.map(function (voice) {
-        return '<option value="' + voice.name + '">' + voice.name + ' (' + voice.lang + ')</option>';
-      }).join('');
     }
   }, {
     key: 'handleVoiceChange',
     value: function handleVoiceChange(e) {
-      this.props.message.voice = this.state.voices[this.voicesDropdown.selectedIndex];
+      this.props.message.voice = this.state.voices[e.target.selectedIndex];
     }
   }, {
     key: 'render',
     value: function render() {
+      var voices = this.state.voices.map(function (voice, i) {
+        return _react2.default.createElement(
+          'option',
+          { key: i, value: voice.name },
+          voice.name,
+          ' (',
+          voice.lang,
+          ')'
+        );
+      });
+
       return _react2.default.createElement(
         'div',
         { className: 'speaker' },
@@ -21716,12 +21631,8 @@ var Speaker = function (_React$Component) {
           { action: '', name: 'speaker' },
           _react2.default.createElement(
             'select',
-            { name: 'voice', id: 'voice', onChange: this.handleVoiceChange },
-            _react2.default.createElement(
-              'option',
-              { defaultValue: '' },
-              'Select a Voice'
-            )
+            { name: 'voice', id: 'voice', onChange: this.handleVoiceChange.bind(this) },
+            voices
           )
         )
       );
@@ -21775,10 +21686,6 @@ var Metronome = function (_React$Component) {
       bpm: 88
     };
 
-    _this.start = _this.start.bind(_this);
-    _this.processInterval = _this.processInterval.bind(_this);
-    _this.stop = _this.stop.bind(_this);
-    _this.speakMsg = _this.speakMsg.bind(_this);
     _this.handleBPMChange = _this.handleBPMChange.bind(_this);
     _this.handleSubmit = _this.handleSubmit.bind(_this);
     return _this;
@@ -21847,6 +21754,7 @@ var Metronome = function (_React$Component) {
     value: function speakMsg(text) {
       speechSynthesis.cancel();
       this.props.message.text = text;
+      this.props.message.rate = 1.4;
       speechSynthesis.speak(this.props.message);
     }
   }, {
