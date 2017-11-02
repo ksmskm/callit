@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width">
-  <title>Call It</title>
-  
-  <link id="pattern-list-view" rel="import" href="html/pattern.html">
+  <title>Call it - R E A C T</title>
 
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/react.css">
 
   <link rel="shortcut icon" type="image/png" href="dist/favicon.ico"/>  
 
@@ -27,64 +26,14 @@
       <ul>
         <li><a href="index.html">Call It</a></li>
         <li><a href="about.html">About</a></li>
-        <li><a href="http://www.ksmskm.com">Portfolio</a></li>
         <li><a href="videos.html">Videos</a></li>
-        <li><a href="react.html">React</a></li>        
+        <li><a href="https://www.ksmskm.com">Portfolio</a></li>
       </ul>
     </nav>
 
   </header>
 
-  <div class="main">
-  
-    <div class="speaker">
-      <h3>Voice</h3>
-      <form action="" name="speaker">
-        <select name="voice" id="voice">
-          <option value="">Select a Voice</option>
-        </select>
-      </form>
-    </div>
-
-    <div class="patterns">
-      <h3>Patterns</h3>
-      <div class="patterns-body">
-        <div class="pattern-form">
-          <form action="" name="patterns" method="post">
-            <div class="name">
-              <label for="pattern_name">Name:</label>
-              <input type="text" id="pattern_name" name="name">
-            </div>
-            <div class="count">
-              <label for="pattern_count">Count:</label>
-              <input type="number" id="pattern_count" name="count" step="2" value="6" min="2" max="16">
-            </div>
-            <div class="button">
-              <button class="addPattern" type="submit">Submit</button>
-            </div>
-          </form>
-        </div>
-
-        <div class="pattern-list">
-          <ul id="pattern-list"></ul>
-        </div>          
-      </div>
-    </div>
-
-    <div class="metronome">
-      <h3>Metronome</h3>
-      <form action="" name="metronome">
-        <div>
-          <label for="bpm">BPM:</label>
-          <input type="number" name="bpm" id="bpm" step="2" value="88" min="60" max="144">
-        </div>
-        <div class="button">
-          <button class="toggle" type="button">Start/Stop</button>
-        </div>
-      </form>
-    </div>
-
-  </div>    
+  <div class="main" id="app"></div>    
 
   <footer>
 
@@ -92,15 +41,13 @@
       <ul>
         <li><a href="index.html">Call It</a></li>
         <li><a href="about.html">About</a></li>
-        <li><a href="www.ksmskm.com">Portfolio</a></li>
         <li><a href="videos.html">Videos</a></li>
-        <li><a href="react.html">React</a></li>
+        <li><a href="www.ksmskm.com">Portfolio</a></li>
       </ul>
     </nav>
 
   </footer>
-  
-  <script src="dist/js/index.js"></script>
 
+  <script src="dist/js/bundle.js"></script>
 </body>
 </html>

@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import PatternContainer from './components/PatternContainer';
-import Speaker from './components/Speaker';
-import Metronome from './components/Metronome';
+import PatternContainer from './components/callit/PatternContainer';
+import Speaker from './components/callit/Speaker';
+import Metronome from './components/callit/Metronome';
 
 class App extends React.Component {
   constructor (props) {

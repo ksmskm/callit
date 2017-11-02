@@ -1,7 +1,7 @@
 module.exports = {
-  entry: "./react/App.js",
+  entry: './react/App.js',
   output: {
-    filename: "dist/js/bundle.js"
+    filename: 'dist/js/bundle.js'
   },
   module: {
     loaders: [
