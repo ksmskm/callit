@@ -13,7 +13,7 @@
     "react"
   ],
 	"rules": {
-	  "indent": [2, 2],
+	  "indent": 0,
     "quotes": [1, "single"],
     "react/wrap-multilines": 0,
     "react/no-multi-comp": 1,

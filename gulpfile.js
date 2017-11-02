@@ -1,6 +1,5 @@
 const gulp       = require('gulp');
 const browserify = require('browserify');
-const babelify   = require('babelify');
 const source     = require('vinyl-source-stream');
 const livereload = require('gulp-livereload');
 const sass       = require('gulp-sass');
@@ -28,26 +27,26 @@ gulp.task('watch', ['build'], function () {
   gulp.watch(['./*.html', 'html/*.html'], ['html']);
   gulp.watch('css/*.css', ['css']);
   gulp.watch('scss/*.scss', ['scss']);
-  gulp.watch('./js/*.js', ['build']);
+  // gulp.watch('./js/*.js', ['build']);
 });
 
 gulp.task('default', ['watch']);
 
-gulp.task('html', function() {
+gulp.task('html', function () {
   gulp
     .src(['./*.html', 'html/*.html'])
     .pipe(plumber({ errorHandler: onError }))
     .pipe(livereload());
 });
 
-gulp.task('css', function() {
+gulp.task('css', function () {
   gulp
     .src('css/*.css')
     .pipe(plumber({ errorHandler: onError }))
     .pipe(livereload());
 });
 
-gulp.task('scss', function() {
+gulp.task('scss', function () {
   gulp
     .src(['./scss/*.scss'])
     .pipe(plumber({ errorHandler: onError }))
