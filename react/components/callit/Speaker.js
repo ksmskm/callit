@@ -5,7 +5,7 @@ class Speaker extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      voices: []
+      voices: speechSynthesis.getVoices().filter(voice => voice.lang.includes('en'))
     };
   }
 

@@ -6,10 +6,10 @@ const Footer = () => (
 
     <nav>    
       <ul>
-        <li><Link to="index.html">Call It</Link></li>
-        <li><Link to="about.html">About</Link></li>
-        <li><Link to="videos.html">Videos</Link></li>
-        <li><Link to="www.ksmskm.com">Portfolio</Link></li>
+        <li><Link to="/">Call It</Link></li>
+        <li><Link to="/about">About</Link></li>
+        <li><Link to="/videos">Videos</Link></li>
+        <li><a href="http://www.ksmskm.com">Portfolio</a></li>
       </ul>
     </nav>
 

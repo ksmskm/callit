@@ -2381,36 +2381,14 @@ var _App = __webpack_require__(77);
 
 var _App2 = _interopRequireDefault(_App);
 
-var _Header = __webpack_require__(84);
-
-var _Header2 = _interopRequireDefault(_Header);
-
-var _Footer = __webpack_require__(85);
-
-var _Footer2 = _interopRequireDefault(_Footer);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function Router(props) {
-		return _react2.default.createElement(
-				_reactRouterDom.BrowserRouter,
-				null,
-				_react2.default.createElement(
-						'div',
-						null,
-						_react2.default.createElement(_Header2.default, null),
-						_react2.default.createElement(
-								'div',
-								null,
-								_react2.default.createElement(
-										_reactRouterDom.Switch,
-										null,
-										_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _App2.default })
-								)
-						),
-						_react2.default.createElement(_Footer2.default, null)
-				)
-		);
+  return _react2.default.createElement(
+    _reactRouterDom.BrowserRouter,
+    null,
+    _react2.default.createElement(_App2.default, null)
+  );
 }
 
 _reactDom2.default.render(_react2.default.createElement(Router, null), document.getElementById('app'));
@@ -25634,115 +25612,40 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(22);
+var _reactRouterDom = __webpack_require__(50);
 
-var _reactDom2 = _interopRequireDefault(_reactDom);
+var _Header = __webpack_require__(84);
 
-var _PatternContainer = __webpack_require__(78);
+var _Header2 = _interopRequireDefault(_Header);
 
-var _PatternContainer2 = _interopRequireDefault(_PatternContainer);
+var _Callit = __webpack_require__(86);
 
-var _Speaker = __webpack_require__(82);
+var _Callit2 = _interopRequireDefault(_Callit);
 
-var _Speaker2 = _interopRequireDefault(_Speaker);
+var _Footer = __webpack_require__(85);
 
-var _Metronome = __webpack_require__(83);
-
-var _Metronome2 = _interopRequireDefault(_Metronome);
+var _Footer2 = _interopRequireDefault(_Footer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var App = function (_React$Component) {
-  _inherits(App, _React$Component);
-
-  function App(props) {
-    _classCallCheck(this, App);
-
-    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
-
-    _this.state = {
-      message: new SpeechSynthesisUtterance(),
-      patterns: [{
-        name: 'left side pass',
-        count: 6
-      }, {
-        name: 'hammer lock',
-        count: 6
-      }, {
-        name: 'whip',
-        count: 8
-      }]
-    };
-    _this.handleAdd = _this.handleAdd.bind(_this);
-    _this.handleRemove = _this.handleRemove.bind(_this);
-    return _this;
-  }
-
-  _createClass(App, [{
-    key: 'handleAdd',
-    value: function handleAdd(name, count) {
-      var pattern = {
-        name: name.toLowerCase(),
-        count: count
-      };
-
-      var names = this.state.patterns.map(function (pattern) {
-        return pattern.name;
-      });
-
-      if (names.includes(pattern.name)) {
-        alert('duplicate');
-      } else {
-        this.state.patterns.push(pattern);
-        this.setState(function (prevState) {
-          return { patterns: prevState.patterns };
-        });
-      }
-    }
-  }, {
-    key: 'handleRemove',
-    value: function handleRemove(name) {
-      this.setState(function (prevState) {
-        var remainder = prevState.patterns.filter(function (pattern) {
-          if (pattern.name !== name) return pattern;
-        });
-        return { patterns: remainder };
-      });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(_Speaker2.default, { message: this.state.message }),
-        _react2.default.createElement(_PatternContainer2.default, {
-          patterns: this.state.patterns,
-          handleAdd: this.handleAdd,
-          handleRemove: this.handleRemove
-        }),
-        _react2.default.createElement(_Metronome2.default, {
-          patterns: this.state.patterns,
-          message: this.state.message
-        })
-      );
-    }
-  }]);
-
-  return App;
-}(_react2.default.Component);
+function App(props) {
+  return _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(_Header2.default, null),
+    _react2.default.createElement(
+      _reactRouterDom.Switch,
+      null,
+      _react2.default.createElement(_reactRouterDom.Redirect, { exact: true, from: '/', to: '/callit' }),
+      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/callit', component: _Callit2.default })
+    ),
+    _react2.default.createElement(_Footer2.default, null)
+  );
+}
 
 exports.default = App;
 
@@ -26051,7 +25954,9 @@ var Speaker = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Speaker.__proto__ || Object.getPrototypeOf(Speaker)).call(this, props));
 
     _this.state = {
-      voices: []
+      voices: speechSynthesis.getVoices().filter(function (voice) {
+        return voice.lang.includes('en');
+      })
     };
     return _this;
   }
@@ -26322,8 +26227,8 @@ var Header = function Header() {
 		'header',
 		null,
 		_react2.default.createElement(
-			_reactRouterDom.Link,
-			{ to: 'https://www.ksmskm.com/' },
+			'a',
+			{ href: 'https://www.ksmskm.com' },
 			_react2.default.createElement('img', { src: 'dist/pixel-headshot-cropped.png', alt: 'logo' })
 		),
 		_react2.default.createElement(
@@ -26342,7 +26247,7 @@ var Header = function Header() {
 					null,
 					_react2.default.createElement(
 						_reactRouterDom.Link,
-						{ to: 'index.html' },
+						{ to: '/' },
 						'Call It'
 					)
 				),
@@ -26351,7 +26256,7 @@ var Header = function Header() {
 					null,
 					_react2.default.createElement(
 						_reactRouterDom.Link,
-						{ to: 'about.html' },
+						{ to: '/about' },
 						'About'
 					)
 				),
@@ -26360,7 +26265,7 @@ var Header = function Header() {
 					null,
 					_react2.default.createElement(
 						_reactRouterDom.Link,
-						{ to: 'videos.html' },
+						{ to: '/videos' },
 						'Videos'
 					)
 				),
@@ -26368,8 +26273,8 @@ var Header = function Header() {
 					'li',
 					null,
 					_react2.default.createElement(
-						_reactRouterDom.Link,
-						{ to: 'https://www.ksmskm.com' },
+						'a',
+						{ href: 'https://www.ksmskm.com' },
 						'Portfolio'
 					)
 				)
@@ -26414,7 +26319,7 @@ var Footer = function Footer() {
           null,
           _react2.default.createElement(
             _reactRouterDom.Link,
-            { to: 'index.html' },
+            { to: '/' },
             'Call It'
           )
         ),
@@ -26423,7 +26328,7 @@ var Footer = function Footer() {
           null,
           _react2.default.createElement(
             _reactRouterDom.Link,
-            { to: 'about.html' },
+            { to: '/about' },
             'About'
           )
         ),
@@ -26432,7 +26337,7 @@ var Footer = function Footer() {
           null,
           _react2.default.createElement(
             _reactRouterDom.Link,
-            { to: 'videos.html' },
+            { to: '/videos' },
             'Videos'
           )
         ),
@@ -26440,8 +26345,8 @@ var Footer = function Footer() {
           'li',
           null,
           _react2.default.createElement(
-            _reactRouterDom.Link,
-            { to: 'www.ksmskm.com' },
+            'a',
+            { href: 'http://www.ksmskm.com' },
             'Portfolio'
           )
         )
@@ -26451,6 +26356,125 @@ var Footer = function Footer() {
 };
 
 exports.default = Footer;
+
+/***/ }),
+/* 86 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _PatternContainer = __webpack_require__(78);
+
+var _PatternContainer2 = _interopRequireDefault(_PatternContainer);
+
+var _Speaker = __webpack_require__(82);
+
+var _Speaker2 = _interopRequireDefault(_Speaker);
+
+var _Metronome = __webpack_require__(83);
+
+var _Metronome2 = _interopRequireDefault(_Metronome);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Callit = function (_React$Component) {
+  _inherits(Callit, _React$Component);
+
+  function Callit(props) {
+    _classCallCheck(this, Callit);
+
+    var _this = _possibleConstructorReturn(this, (Callit.__proto__ || Object.getPrototypeOf(Callit)).call(this, props));
+
+    _this.state = {
+      message: new SpeechSynthesisUtterance(),
+      patterns: [{
+        name: 'left side pass',
+        count: 6
+      }, {
+        name: 'hammer lock',
+        count: 6
+      }, {
+        name: 'whip',
+        count: 8
+      }]
+    };
+    _this.handleAdd = _this.handleAdd.bind(_this);
+    _this.handleRemove = _this.handleRemove.bind(_this);
+    return _this;
+  }
+
+  _createClass(Callit, [{
+    key: 'handleAdd',
+    value: function handleAdd(name, count) {
+      var pattern = {
+        name: name.toLowerCase(),
+        count: count
+      };
+
+      var names = this.state.patterns.map(function (pattern) {
+        return pattern.name;
+      });
+
+      if (names.includes(pattern.name)) {
+        alert('duplicate');
+      } else {
+        this.state.patterns.push(pattern);
+        this.setState(function (prevState) {
+          return { patterns: prevState.patterns };
+        });
+      }
+    }
+  }, {
+    key: 'handleRemove',
+    value: function handleRemove(name) {
+      this.setState(function (prevState) {
+        var remainder = prevState.patterns.filter(function (pattern) {
+          if (pattern.name !== name) return pattern;
+        });
+        return { patterns: remainder };
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'main' },
+        _react2.default.createElement(_Speaker2.default, { message: this.state.message }),
+        _react2.default.createElement(_PatternContainer2.default, {
+          patterns: this.state.patterns,
+          handleAdd: this.handleAdd,
+          handleRemove: this.handleRemove
+        }),
+        _react2.default.createElement(_Metronome2.default, {
+          patterns: this.state.patterns,
+          message: this.state.message
+        })
+      );
+    }
+  }]);
+
+  return Callit;
+}(_react2.default.Component);
+
+exports.default = Callit;
 
 /***/ })
 /******/ ]);
