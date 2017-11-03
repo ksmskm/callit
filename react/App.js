@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import PatternContainer from './components/callit/PatternContainer';
 import Speaker from './components/callit/Speaker';
 import Metronome from './components/callit/Metronome';
@@ -54,21 +55,21 @@ class App extends React.Component {
   }
 
   render () {
-    return (
+    return (    
       <div>
         <Speaker message={this.state.message} />
         <PatternContainer 
-        	patterns={this.state.patterns}
-        	handleAdd={this.handleAdd} 
-        	handleRemove={this.handleRemove}
+          patterns={this.state.patterns}
+          handleAdd={this.handleAdd} 
+          handleRemove={this.handleRemove}
         />
         <Metronome 
-        	patterns={this.state.patterns} 
-        	message={this.state.message}
+          patterns={this.state.patterns} 
+          message={this.state.message}
         />
       </div>
     );
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+export default App;

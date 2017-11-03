@@ -1,5 +1,5 @@
 module.exports = {
-  entry: './react/App.js',
+  entry: './react/Router.js',
   output: {
     filename: 'dist/js/bundle.js'
   },
