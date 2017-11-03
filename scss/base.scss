@@ -81,8 +81,8 @@ header nav, footer nav {
 }
 
 .main {
-  // addresses weird offset of 'voice' h3
-  margin: 40px 0;
+  // addresses weird offset of 'voice' h3 & adds distance between page bottom & footer
+  margin: 40px 0 150px 0;
 }
 
 /* DEV */

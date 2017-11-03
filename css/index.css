@@ -117,3 +117,6 @@ div.pattern {
 
 input:focus {
   outline-color: #999; }
+
+label, input, button {
+  margin-left: 5px; }

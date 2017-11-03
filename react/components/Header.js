@@ -6,11 +6,14 @@ const Header = () => (
 	  <a href="https://www.ksmskm.com">
 	    <img src="dist/pixel-headshot-cropped.png" alt="logo" />
 	  </a>
-	  <h1>Call It</h1>
 	  
+	  <Link to="/callit">
+	  	<h1>Call It</h1>
+	  </Link>	  
+
 	  <nav className="header">    
 	    <ul>
-	      <li><Link to="/">Call It</Link></li>
+	      <li><Link to="/callit">Call It</Link></li>
 	      <li><Link to="/about">About</Link></li>
 	      <li><Link to="/videos">Videos</Link></li>
 	      <li><a href="https://www.ksmskm.com">Portfolio</a></li>
