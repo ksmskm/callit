@@ -1,12 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
+
 class Speaker extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
       voices: speechSynthesis.getVoices().filter(voice => voice.lang.includes('en'))
     };
+    this.handleVoiceChange = this.handleVoiceChange.bind(this);
   }
 
   componentDidMount () {
@@ -19,22 +23,30 @@ class Speaker extends React.Component {
     });
   }
 
-  handleVoiceChange (e) {
-    this.props.message.voice = this.state.voices[e.target.selectedIndex];
+  handleVoiceChange (option) {
+    this.props.message.voice = option.value;
+    this.setState({ selectedOption: option });    
   }
 
   render () {
     var voices = this.state.voices.map((voice, i) => {
-      return <option key={i} value={voice.name}>{voice.name} ({voice.lang})</option>;
+      return {
+        value: voice, 
+        label: `${voice.name} (${voice.lang})`
+      };
     });
 
     return (
       <div className="speaker">
         <h3>Voice</h3>
         <form action="" name="speaker">
-          <select name="voice" id="voice" onChange={this.handleVoiceChange.bind(this)}>
-            {voices}
-          </select>
+          <Select
+            clearable={false}
+            name="voice"
+            options={voices}
+            value={this.state.selectedOption}
+            onChange={this.handleVoiceChange}
+          />          
         </form>
       </div>
     );
