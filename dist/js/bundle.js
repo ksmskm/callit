@@ -26141,7 +26141,7 @@ var Header = function Header() {
 		_react2.default.createElement(
 			'a',
 			{ href: 'https://www.ksmskm.com' },
-			_react2.default.createElement('img', { src: 'dist/img/pixel-headshot-cropped.png', alt: 'logo' })
+			_react2.default.createElement('img', { src: 'img/pixel-headshot-cropped.png', alt: 'logo' })
 		),
 		_react2.default.createElement(
 			_reactRouterDom.Link,
