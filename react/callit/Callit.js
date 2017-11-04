@@ -4,6 +4,8 @@ import PatternContainer from './PatternContainer';
 import Speaker from './Speaker';
 import Metronome from './Metronome';
 
+import '../../dist/css/callit.css';
+
 class Callit extends React.Component {
   constructor (props) {
     super(props);

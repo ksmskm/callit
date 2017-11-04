@@ -1,4 +1,5 @@
 import React from 'react';
+import '../dist/css/videos.css';
 
 function Videos (props) {
   return (

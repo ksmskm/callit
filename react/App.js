@@ -1,10 +1,12 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import Header from './components/Header';
-import Callit from './components/callit/Callit';
-import Footer from './components/Footer';
-import About from './components/About';
-import Videos from './components/Videos';
+import Header from './Header';
+import Callit from './callit/Callit';
+import Footer from './Footer';
+import About from './About';
+import Videos from './Videos';
+
+import '../dist/css/base.css';
 
 function App (props) {
   return (

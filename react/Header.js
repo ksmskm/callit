@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Header = () => (
 	<header>
 	  <a href="https://www.ksmskm.com">
-	    <img src="dist/pixel-headshot-cropped.png" alt="logo" />
+	    <img src="dist/img/pixel-headshot-cropped.png" alt="logo" />
 	  </a>
 	  
 	  <Link to="/callit">
