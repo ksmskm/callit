@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Header = () => (
 	<header>
-	  <a href="https://www.ksmskm.com">
+	  <a href="http://www.ksmskm.com">
 	    <img src="img/pixel-headshot-cropped.png" alt="logo" />
 	  </a>
 	  
@@ -16,7 +16,7 @@ const Header = () => (
 	      <li><Link to="/callit">Call It</Link></li>
 	      <li><Link to="/about">About</Link></li>
 	      <li><Link to="/videos">Videos</Link></li>
-	      <li><a href="https://www.ksmskm.com">Portfolio</a></li>
+	      <li><a href="http://www.ksmskm.com">Portfolio</a></li>
 	    </ul>
 	  </nav>
 

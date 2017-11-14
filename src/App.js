@@ -13,9 +13,8 @@ function App (props) {
     <div>    
       <Header />
       <Switch>
-        <Redirect exact from="/" to="/callit" />
-        <Redirect from="/callit-react" to="/callit" />
-        <Route exact path='/callit' component={Callit} />
+        <Redirect exact from="/" to="/callit-react" />
+        <Route exact path='/callit-react' component={Callit} />
         <Route exact path='/videos' component={Videos} />
         <Route exact path='/about' component={About} />
       </Switch>
