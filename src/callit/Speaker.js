@@ -14,9 +14,11 @@ class Speaker extends React.Component {
   }
 
   componentDidMount () {
-    if ('voiceschanged' in speechSynthesis) {
+    if ('onvoiceschanged' in speechSynthesis) {
+      alert('chrome');
       speechSynthesis.addEventListener('voiceschanged', () => this.populateVoices());
     } else {
+      alert('safari');
       this.populateVoices();
     }
   }

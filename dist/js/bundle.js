@@ -24385,11 +24385,13 @@ var Speaker = function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      if ('voiceschanged' in speechSynthesis) {
+      if ('onvoiceschanged' in speechSynthesis) {
+        alert('chrome');
         speechSynthesis.addEventListener('voiceschanged', function () {
           return _this2.populateVoices();
         });
       } else {
+        alert('safari');
         this.populateVoices();
       }
     }
