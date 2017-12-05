@@ -23844,8 +23844,7 @@ function App(props) {
     _react2.default.createElement(
       _reactRouterDom.Switch,
       null,
-      _react2.default.createElement(_reactRouterDom.Redirect, { exact: true, from: '/', to: '/callit-react' }),
-      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/callit-react', component: _Callit2.default }),
+      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _Callit2.default }),
       _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/videos', component: _Videos2.default }),
       _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/about', component: _About2.default })
     ),
@@ -23885,7 +23884,7 @@ var Header = function Header() {
 		),
 		_react2.default.createElement(
 			_reactRouterDom.Link,
-			{ to: '/callit' },
+			{ to: '/' },
 			_react2.default.createElement(
 				'h1',
 				null,
@@ -23903,7 +23902,7 @@ var Header = function Header() {
 					null,
 					_react2.default.createElement(
 						_reactRouterDom.Link,
-						{ to: '/callit' },
+						{ to: '/' },
 						'Call It'
 					)
 				),
@@ -24386,9 +24385,13 @@ var Speaker = function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      speechSynthesis.addEventListener('voiceschanged', function () {
-        return _this2.populateVoices();
-      });
+      if ('voiceschanged' in speechSynthesis) {
+        speechSynthesis.addEventListener('voiceschanged', function () {
+          return _this2.populateVoices();
+        });
+      } else {
+        this.populateVoices();
+      }
     }
   }, {
     key: 'populateVoices',
@@ -27755,7 +27758,7 @@ var Footer = function Footer() {
           null,
           _react2.default.createElement(
             _reactRouterDom.Link,
-            { to: '/callit' },
+            { to: '/' },
             'Call It'
           )
         ),
