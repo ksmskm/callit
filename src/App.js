@@ -16,6 +16,7 @@ function App (props) {
         <Route exact path='/' component={Callit} />
         <Route exact path='/videos' component={Videos} />
         <Route exact path='/about' component={About} />
+        <Redirect to='/' />
       </Switch>
       <Footer />      
     </div>
